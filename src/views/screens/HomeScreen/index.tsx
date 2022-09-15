@@ -5,9 +5,20 @@ import {lightBlack} from '../../../../assets/colors';
 import Button from '../../../components/Button';
 import {userInfo} from './constants';
 import styles from './styles';
+import {useNavigation} from '@react-navigation/native';
+import {screenNames} from '../../../navigation/screenNames';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {NavigationStack} from '../../../navigation/entities';
 
 const HomeScreen = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<NavigationStack>>();
+
   const img = require('../../../../assets/homeScreenBackground.png');
+  const redirectTo = () => {
+    navigation.navigate(screenNames.QUIZ_SELECTION);
+  };
+
   return (
     <ImageBackground source={img}>
       <SafeAreaView style={styles.container}>
@@ -41,7 +52,7 @@ const HomeScreen = () => {
         </View>
         <View style={styles.buttons}>
           <Button text={'Random quiz'} onPress={() => {}} />
-          <Button text={'Select quiz'} onPress={() => {}} />
+          <Button text={'Select quiz'} onPress={redirectTo} />
         </View>
       </SafeAreaView>
     </ImageBackground>
