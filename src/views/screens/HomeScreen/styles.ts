@@ -3,7 +3,7 @@ import {lightBlack} from '../../../../assets/colors';
 
 export default StyleSheet.create({
   container: {
-    height: Dimensions.get('screen').height,
+    height: Dimensions.get('window').height,
     justifyContent: 'space-between',
   },
   header: {

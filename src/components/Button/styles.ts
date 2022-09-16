@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   button: {
     borderColor: 'rgb(0,0,0, 0.3)',
     borderWidth: 1,

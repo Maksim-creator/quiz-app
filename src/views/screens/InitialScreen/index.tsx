@@ -11,6 +11,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import Button from '../../../components/Button';
 import {welcomeMessage} from '../../../constants';
+import {initialScreenBackground as uri} from './constants';
 import {screenNames} from '../../../navigation/screenNames';
 import {NavigationStack} from '../../../navigation/entities';
 import {styles, animatedText} from './styles';
@@ -61,9 +62,7 @@ const InitialScreen = () => {
     <ImageBackground
       accessibilityLabel={'imageBackground'}
       style={styles.image}
-      source={{
-        uri: 'https://www.fonewalls.com/wp-content/uploads/2019/10/Clouds-White-Mountain-Wallpaper-HD.jpg',
-      }}>
+      source={{uri}}>
       <SafeAreaView style={styles.container}>
         <View style={styles.textContainer}>
           {welcomeMessageArray.map((word, index) => (
