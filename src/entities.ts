@@ -1,19 +1,19 @@
 export interface Answers {
-  answer_a: string;
-  answer_b: string;
-  answer_c: string;
-  answer_d: string;
-  answer_e?: any;
-  answer_f?: any;
+  answerA: string;
+  answerB: string;
+  answerC: string;
+  answerD: string;
+  answerE?: any;
+  answerF?: any;
 }
 
 export interface CorrectAnswers {
-  answer_a_correct: string;
-  answer_b_correct: string;
-  answer_c_correct: string;
-  answer_d_correct: string;
-  answer_e_correct: string;
-  answer_f_correct: string;
+  answerACorrect: string;
+  answerBCorrect: string;
+  answerCCorrect: string;
+  answerDCorrect: string;
+  answerECorrect: string;
+  answerFCorrect: string;
 }
 
 export interface Tag {
@@ -23,12 +23,12 @@ export interface Tag {
 export interface Question {
   id: number;
   question: string;
-  description?: any;
+  description?: string;
   answers: Answers;
-  multiple_correct_answers: string;
-  correct_answers: CorrectAnswers;
-  correct_answer?: any;
-  explanation?: any;
+  multipleCorrectAnswers: string;
+  correctAnswers: CorrectAnswers;
+  correctAnswer?: string;
+  explanation?: string;
   tip?: any;
   tags: Tag[];
   category: string;
