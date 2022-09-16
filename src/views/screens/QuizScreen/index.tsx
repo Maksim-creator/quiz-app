@@ -50,7 +50,7 @@ const QuizScreen = () => {
     );
     setQuestions(
       res.data.filter(
-        (item: Question) => item.multiple_correct_answers === 'false',
+        (item: Question) => item.multipleCorrectAnswers === 'false',
       ),
     );
     setCurrentStep('timer');
@@ -121,7 +121,8 @@ const QuizScreen = () => {
       {questions.length && !timerNumber && currentStep === 'started' ? (
         <AnswerButtons
           answers={questions[questionIndex].answers}
-          correctAnswer={questions[questionIndex].correct_answer}
+          correctAnswers={questions[questionIndex].correctAnswers}
+          extraAnswer={questions[questionIndex].correctAnswer}
           showNextQuestion={handleShowNextQuestion}
         />
       ) : null}

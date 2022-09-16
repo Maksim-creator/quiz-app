@@ -2,18 +2,20 @@ import React, {useCallback, useMemo, useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {compact} from 'lodash';
 import {sleep} from '../../utils';
-import {Answers} from '../../entities';
+import {Answers, CorrectAnswers} from '../../entities';
 import styles from './styles';
 
 interface Props {
   answers: Answers;
-  correctAnswer: string;
+  correctAnswers: CorrectAnswers;
+  extraAnswer?: string;
   showNextQuestion: () => void;
 }
 
 const AnswerButtons: React.FC<Props> = ({
   answers,
-  correctAnswer,
+  correctAnswers,
+  extraAnswer,
   showNextQuestion,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -26,6 +28,21 @@ const AnswerButtons: React.FC<Props> = ({
       ),
     [answers],
   );
+
+  const correctAnswer = useMemo(() => {
+    const correctValue = Object.keys(correctAnswers).find(
+      key => correctAnswers[key as keyof typeof correctAnswers] === 'true',
+    );
+
+    if (correctValue) {
+      return correctValue.replace('Correct', '');
+    } else {
+      const split = extraAnswer?.split('_');
+      const letter = split![1].toUpperCase();
+
+      return split![0].concat(letter);
+    }
+  }, [correctAnswers]);
 
   const resetAnswers = () => {
     setRightAnswer(null);
