@@ -9,28 +9,34 @@ interface Props {
   handleStart: () => void;
 }
 
+const VARIANTS = [5, 10, 15, 20];
+
 const CountSelection: React.FC<Props> = ({
   questionsCount,
   setQuestionsCount,
   handleStart,
 }) => {
+  const setCountValue = (item: number) => () => {
+    setQuestionsCount(item);
+  };
+
   return (
     <View style={styles.numOfQuestionsWrapper}>
       <View style={styles.items}>
         <Text style={styles.subtitle}>Choose number of questions:</Text>
         <View style={styles.buttons}>
-          {[5, 10, 15, 20].map(item => (
+          {VARIANTS.map(item => (
             <Button
               key={item}
               styles={styles.button(questionsCount, item)}
               text={item.toString()}
-              onPress={() => setQuestionsCount(item)}
+              onPress={setCountValue(item)}
             />
           ))}
           <Button
             styles={styles.randomButton(questionsCount)}
             text={'Random (5 - 20)'}
-            onPress={() => setQuestionsCount(-1)}
+            onPress={setCountValue(-1)}
           />
         </View>
       </View>

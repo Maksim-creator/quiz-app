@@ -32,13 +32,14 @@ const AnswerButtons: React.FC<Props> = ({
     setSelectedAnswer(null);
   };
 
-  const handleAnswerSelect = async (answer: {key: string; value: string}) => {
-    setSelectedAnswer(answer.key);
-    setRightAnswer(answer.key === correctAnswer);
-    await sleep(2000);
-    showNextQuestion();
-    resetAnswers();
-  };
+  const handleAnswerSelect =
+    (answer: {key: string; value: string}) => async () => {
+      setSelectedAnswer(answer.key);
+      setRightAnswer(answer.key === correctAnswer);
+      await sleep(2000);
+      showNextQuestion();
+      resetAnswers();
+    };
 
   const renderColor = useCallback(() => {
     if (selectedAnswer) {
@@ -57,7 +58,7 @@ const AnswerButtons: React.FC<Props> = ({
       {answersArray.map(answer => (
         <TouchableOpacity
           key={answer.key}
-          onPress={() => handleAnswerSelect(answer)}
+          onPress={handleAnswerSelect(answer)}
           style={{
             ...styles.answerButton,
             backgroundColor:
