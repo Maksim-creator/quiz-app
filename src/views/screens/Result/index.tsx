@@ -133,7 +133,7 @@ const Result = () => {
               </View>
               <View style={styles.columnItem}>
                 <Text style={styles.label}>COMPLETION</Text>
-                <Text style={styles.text}>{animatedScore}%</Text>
+                <Text style={styles.text}>{animatedScore || 0}%</Text>
               </View>
             </View>
             <View style={styles.column}>
