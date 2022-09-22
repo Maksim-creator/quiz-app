@@ -31,6 +31,7 @@ const QuizScreen = () => {
   const [timerNumber, setTimerNumber] = useState(3);
   const [questionIndex, setQuestionIndex] = useState<number>(0);
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [score, setScore] = useState(0);
   const scaleAnimation = new Animated.Value(1.2);
   const opacityAnimation = new Animated.Value(1);
 
@@ -39,7 +40,6 @@ const QuizScreen = () => {
       questionsCount < 0
         ? Math.floor(Math.random() * (20 - 5 + 1) + 5)
         : questionsCount;
-
     const res = await client.get(
       `/questions?category=${params.categoryName}&limit=${limit}`,
       {
@@ -57,11 +57,13 @@ const QuizScreen = () => {
   };
 
   const handleShowNextQuestion = () => {
-    setQuestionIndex(prevState =>
-      questions.length - 1 > questionIndex ? prevState + 1 : prevState,
-    );
     if (questionIndex === questions.length - 1) {
-      navigation.navigate(screenNames.RESULT);
+      navigation.navigate(screenNames.RESULT, {
+        score,
+        questions,
+      });
+    } else {
+      setQuestionIndex(prevState => prevState + 1);
     }
   };
 
@@ -124,6 +126,7 @@ const QuizScreen = () => {
           correctAnswers={questions[questionIndex].correctAnswers}
           extraAnswer={questions[questionIndex].correctAnswer}
           showNextQuestion={handleShowNextQuestion}
+          setScore={setScore}
         />
       ) : null}
     </View>

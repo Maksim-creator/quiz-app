@@ -10,6 +10,7 @@ interface Props {
   correctAnswers: CorrectAnswers;
   extraAnswer?: string;
   showNextQuestion: () => void;
+  setScore: Function;
 }
 
 const AnswerButtons: React.FC<Props> = ({
@@ -17,17 +18,10 @@ const AnswerButtons: React.FC<Props> = ({
   correctAnswers,
   extraAnswer,
   showNextQuestion,
+  setScore,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isRightAnswer, setRightAnswer] = useState<boolean | null>(null);
-
-  const answersArray = useMemo(
-    () =>
-      compact(
-        Object.entries(answers).map(([key, value]) => value && {key, value}),
-      ),
-    [answers],
-  );
 
   const correctAnswer = useMemo(() => {
     const correctValue = Object.keys(correctAnswers).find(
@@ -49,11 +43,22 @@ const AnswerButtons: React.FC<Props> = ({
     setSelectedAnswer(null);
   };
 
+  const answersArray = useMemo(
+    () =>
+      compact(
+        Object.entries(answers).map(([key, value]) => value && {key, value}),
+      ),
+    [answers],
+  );
+
   const handleAnswerSelect =
     (answer: {key: string; value: string}) => async () => {
+      if (answer.key === correctAnswer) {
+        setScore((prevState: number) => prevState + 1);
+      }
       setSelectedAnswer(answer.key);
       setRightAnswer(answer.key === correctAnswer);
-      await sleep(2000);
+      await sleep(1000);
       showNextQuestion();
       resetAnswers();
     };
