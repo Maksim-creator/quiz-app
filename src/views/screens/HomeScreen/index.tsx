@@ -1,61 +1,61 @@
 import React from 'react';
-import {Image, ImageBackground, SafeAreaView, Text, View} from 'react-native';
+import {Image, SafeAreaView, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {lightBlack} from '../../../../assets/colors';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useNavigation} from '@react-navigation/native';
+import {white} from '../../../../assets/colors';
 import Button from '../../../components/Button';
 import {userInfo} from './constants';
-import styles from './styles';
-import {useNavigation} from '@react-navigation/native';
 import {screenNames} from '../../../navigation/screenNames';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {NavigationStack} from '../../../navigation/entities';
+import TopCircles from '../../../components/TopCircles';
+import styles from './styles';
 
 const HomeScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationStack>>();
 
-  const img = require('../../../../assets/homeScreenBackground.png');
   const redirectTo = () => {
     navigation.navigate(screenNames.QUIZ_SELECTION);
   };
 
   return (
-    <ImageBackground source={img}>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.wrapper}>
-          <View style={styles.header}>
-            <Icon name={'cog'} color={lightBlack} size={25} />
-            <Icon name={'help-circle-outline'} color={lightBlack} size={25} />
-          </View>
-          <View style={styles.user}>
-            <Image
-              source={{
-                uri: 'https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-male-3-1024.png',
-              }}
-              resizeMode={'cover'}
-              style={styles.avatar}
-            />
-            <View style={styles.content}>
-              <View style={styles.infoContainer}>
-                <Text style={styles.boldText}>Nickname</Text>
-                <View style={styles.info}>
-                  {userInfo.map(item => (
-                    <View key={item.label}>
-                      <Text style={styles.boldText}>{item.label}</Text>
-                      <Text style={styles.text}>{item.value}</Text>
-                    </View>
-                  ))}
-                </View>
+    <SafeAreaView style={styles.container}>
+      <TopCircles />
+      <View style={styles.wrapper}>
+        <View>
+          <Image
+            source={{
+              uri: 'https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-male-3-1024.png',
+            }}
+            resizeMode={'cover'}
+            style={styles.avatar}
+          />
+          <Text style={styles.name}>John Doe</Text>
+          <View style={styles.info}>
+            {userInfo.map(item => (
+              <View key={item.label} style={styles.item}>
+                <Icon name={item.icon} size={25} color={white} />
+                <Text style={styles.label}>{item.label}</Text>
+                <Text style={styles.text}>{item.value}</Text>
               </View>
-            </View>
+            ))}
           </View>
         </View>
         <View style={styles.buttons}>
-          <Button text={'Random quiz'} onPress={() => {}} />
-          <Button text={'Select quiz'} onPress={redirectTo} />
+          <Button
+            styles={styles.button}
+            text={'Random quiz'}
+            onPress={() => {}}
+          />
+          <Button
+            styles={styles.button}
+            text={'Select quiz'}
+            onPress={redirectTo}
+          />
         </View>
-      </SafeAreaView>
-    </ImageBackground>
+      </View>
+    </SafeAreaView>
   );
 };
 

@@ -1,5 +1,5 @@
 export const userInfo = [
-  {label: 'Balance', value: '1000'},
-  {label: 'Rank', value: '2'},
-  {label: 'Lives', value: '3'},
+  {label: 'BALANCE', value: '1000', icon: 'cash'},
+  {label: 'POINTS', value: '242', icon: 'star-outline'},
+  {label: 'RANK', value: '#15', icon: 'earth'},
 ];

@@ -58,6 +58,8 @@ const CorrectAnswersModal: React.FC<Props> = ({
     );
   };
 
+  const keyExtractor = (item: Question) => item.question;
+
   return (
     <Modal
       isVisible={isVisible}
@@ -77,7 +79,11 @@ const CorrectAnswersModal: React.FC<Props> = ({
           size={25}
           color={'black'}
         />
-        <FlatList data={questions} renderItem={renderItem} />
+        <FlatList
+          data={questions}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+        />
       </View>
     </Modal>
   );

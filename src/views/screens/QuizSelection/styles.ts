@@ -1,60 +1,86 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {violet, white} from '../../../../assets/colors';
+import {isAndroid} from '../../../utils';
 
-export default StyleSheet.create({
+export default StyleSheet.create<any>({
   container: {
-    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: violet,
+    height: '100%',
   },
   title: {
-    width: '68%',
-    color: 'black',
-    fontSize: 20,
-    paddingVertical: 20,
+    color: white,
+    fontSize: 22,
+    fontWeight: '800',
+    textAlign: 'center',
+    letterSpacing: 1.1,
+  },
+  backIcon: {
+    position: 'absolute',
+    top: 4,
+    left: 15,
+    zIndex: 100,
   },
   description: {
-    color: 'black',
+    color: white,
+    textAlign: 'center',
+    fontWeight: '600',
     width: '80%',
   },
   items: {
-    marginTop: 10,
-    marginBottom: 40,
+    backgroundColor: white,
+    height: isAndroid() ? '85%' : '87%',
+    width: '95%',
+    marginVertical: 10,
+    borderRadius: 25,
+    justifyContent: 'space-between',
   },
   item: {
-    marginTop: 15,
-    position: 'relative',
-    width: Dimensions.get('screen').width - 100,
-    shadowColor: 'black',
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    shadowOffset: {width: 0, height: 0},
-    borderRadius: 10,
+    marginVertical: 7,
+    width: '44%',
+    borderRadius: 30,
+    paddingVertical: 25,
   },
-  image: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    borderRadius: 10,
+  content: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  overlay: {
-    borderRadius: 10,
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'black',
-    opacity: 0.5,
-  },
-  content: {paddingVertical: 50, paddingHorizontal: 30},
-  icon: {textAlign: 'center', paddingBottom: 6},
   label: {
-    color: 'white',
+    color: violet,
     textAlign: 'center',
     fontWeight: '700',
     fontSize: 18,
   },
-  header: {
+  titleContainer: {
+    position: 'relative',
     width: '100%',
-    flexDirection: 'row',
+    paddingBottom: 15,
+    paddingTop: 8,
+  },
+  iconContainer: (isSelected: boolean) => ({
+    backgroundColor: isSelected ? 'rgba(255,255,255,0.21)' : white,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
+    marginBottom: 10,
+  }),
+  columnWrapperStyle: {
     justifyContent: 'space-between',
   },
-  backIcon: {marginLeft: 15},
+  contentContainerStyle: {
+    width: '100%',
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
+  },
+  list: {
+    marginTop: 10,
+    maxHeight: '90%',
+  },
+  button: {
+    marginVertical: 8,
+    marginHorizontal: 10,
+  },
 });

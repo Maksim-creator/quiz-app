@@ -1,13 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Animated, Easing, View} from 'react-native';
+import {Animated, Easing, SafeAreaView} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {client} from '../../../api/api.config';
 import AnswerButtons from '../../../components/AnswerButtons';
 import {screenNames} from '../../../navigation/screenNames';
 import {Question} from '../../../entities';
 import {xApiKey} from '../../../constants';
-import QuestionHeader from '../../components/QuestionHeader';
 import CountSelection from '../../components/CountSelection';
 import Timer from '../../components/Timer';
 import {NavigationStack} from '../../../navigation/entities';
@@ -25,23 +25,18 @@ const QuizScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationStack>>();
   const {params} = useRoute<RouteProp<ParamList, 'QuizScreen'>>();
-  const timer = useRef<any>();
-  const [questionsCount, setQuestionsCount] = useState(0);
+  const timer = useRef<NodeJS.Timer>();
   const [currentStep, setCurrentStep] = useState('count');
   const [timerNumber, setTimerNumber] = useState(3);
   const [questionIndex, setQuestionIndex] = useState<number>(0);
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [score, setScore] = useState(0);
+
   const scaleAnimation = new Animated.Value(1.2);
   const opacityAnimation = new Animated.Value(1);
 
-  const handleStart = async () => {
-    const limit =
-      questionsCount < 0
-        ? Math.floor(Math.random() * (20 - 5 + 1) + 5)
-        : questionsCount;
+  const handleStart = async (count: number) => {
     const res = await client.get(
-      `/questions?category=${params.categoryName}&limit=${limit}`,
+      `/questions?category=${params.categoryName}&limit=${count}`,
       {
         headers: {
           'X-Api-Key': xApiKey,
@@ -56,7 +51,7 @@ const QuizScreen = () => {
     setCurrentStep('timer');
   };
 
-  const handleShowNextQuestion = () => {
+  const handleShowNextQuestion = (score: number) => {
     if (questionIndex === questions.length - 1) {
       navigation.navigate(screenNames.RESULT, {
         score,
@@ -98,19 +93,22 @@ const QuizScreen = () => {
   }, [timerNumber]);
 
   return (
-    <View style={styles.container}>
-      <QuestionHeader
-        questions={questions}
-        questionIndex={questionIndex}
-        currentStep={currentStep}
-        timerNumber={timerNumber}
-        params={params}
-      />
+    <SafeAreaView style={styles.container}>
+      {currentStep !== 'started' && currentStep !== 'timer' && (
+        <Icon
+          onPress={() => {
+            navigation.goBack();
+          }}
+          style={styles.backIcon}
+          name={'arrow-left-thin'}
+          size={35}
+          color={'white'}
+        />
+      )}
       {currentStep === 'count' && (
         <CountSelection
-          questionsCount={questionsCount}
-          setQuestionsCount={setQuestionsCount}
           handleStart={handleStart}
+          category={params.categoryName}
         />
       )}
       {currentStep === 'timer' && (
@@ -118,18 +116,17 @@ const QuizScreen = () => {
           scaleAnimation={scaleAnimation}
           opacityAnimation={opacityAnimation}
           timerNumber={timerNumber}
+          finalWord={'Start!'}
         />
       )}
       {questions.length && !timerNumber && currentStep === 'started' ? (
         <AnswerButtons
-          answers={questions[questionIndex].answers}
-          correctAnswers={questions[questionIndex].correctAnswers}
-          extraAnswer={questions[questionIndex].correctAnswer}
+          questions={questions}
+          questionIndex={questionIndex}
           showNextQuestion={handleShowNextQuestion}
-          setScore={setScore}
         />
       ) : null}
-    </View>
+    </SafeAreaView>
   );
 };
 
