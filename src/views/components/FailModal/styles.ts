@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {white} from '../../../../assets/colors';
+import {white} from '../../../assets/colors';
 import {isAndroid} from '../../../utils';
 
 export default StyleSheet.create({

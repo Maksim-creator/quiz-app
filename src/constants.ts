@@ -21,15 +21,15 @@ export const quotes = [
 
 export const animations = [
   {
-    path: require('../assets/dog.json'),
+    path: require('./assets/dog.json'),
     styles: {width: 70, height: 70, top: isAndroid() ? -30 : -20, right: 10},
   },
   {
-    path: require('../assets/dog_grey.json'),
+    path: require('./assets/dog_grey.json'),
     styles: {width: 70, height: 70, top: isAndroid() ? -31 : -20, left: 15},
   },
   {
-    path: require('../assets/dog_yellow.json'),
+    path: require('./assets/dog_yellow.json'),
     styles: {width: 70, height: 70, top: isAndroid() ? -29 : -19, left: 10},
   },
 ];

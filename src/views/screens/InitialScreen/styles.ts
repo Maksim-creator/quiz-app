@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     letterSpacing: 2,
     fontWeight: 'bold',
     fontSize: 25,
+    fontFamily: 'Roboto',
   },
   textContainer: {
     flexDirection: 'row',

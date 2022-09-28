@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {white} from '../../../../assets/colors';
+import {white} from '../../../assets/colors';
 
 export default StyleSheet.create({
   timerContainer: {
@@ -19,5 +19,6 @@ export default StyleSheet.create({
   timerText: {
     fontSize: 25,
     color: white,
+    paddingTop: 10,
   },
 });

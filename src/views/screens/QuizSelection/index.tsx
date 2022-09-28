@@ -5,7 +5,6 @@ import {
   FlatList,
   ListRenderItem,
   SafeAreaView,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -16,8 +15,9 @@ import {isUndefined} from 'lodash';
 import {NavigationStack} from '../../../navigation/entities';
 import {screenNames} from '../../../navigation/screenNames';
 import {categories} from './constants';
-import {pink, violet, white} from '../../../../assets/colors';
+import {pink, violet, white} from '../../../assets/colors';
 import Button from '../../../components/Button';
+import Text from '../../../components/Text';
 import styles from './styles';
 
 const QuizSelection = () => {

@@ -3,7 +3,6 @@ import {
   Animated,
   Easing,
   SafeAreaView,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -14,8 +13,9 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {NavigationStack} from '../../../navigation/entities';
 import {StyleSheet} from 'react-native';
 import {useCounter} from '../../../hooks/useCounter';
-import Trophy from '../../../../assets/svg/Trophy';
+import Trophy from '../../../assets/svg/Trophy';
 import CorrectAnswersModal from '../../components/CorrectAnswersModal';
+import Text from '../../../components/Text';
 import {Question} from '../../../entities';
 
 export type ParamList = {
@@ -220,6 +220,7 @@ const styles = StyleSheet.create<any>({
     paddingTop: 10,
   },
   message: {
+    paddingTop: 10,
     marginBottom: 15,
     fontSize: 22,
     textAlign: 'center',

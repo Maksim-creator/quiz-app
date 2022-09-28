@@ -1,9 +1,10 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import {FlatList, Text, View, ListRenderItem} from 'react-native';
-import {Question} from '../../../entities';
+import {FlatList, View, ListRenderItem} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {compact} from 'lodash';
+import {Question} from '../../../entities';
+import Text from '../../../components/Text';
 import styles from './styles';
 
 interface Props {

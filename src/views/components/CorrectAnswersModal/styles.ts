@@ -49,6 +49,7 @@ export default StyleSheet.create<any>({
     textAlign: 'center',
     fontWeight: '700',
     fontSize: 22,
+    paddingTop: 6,
   },
   closeIcon: {
     position: 'absolute',

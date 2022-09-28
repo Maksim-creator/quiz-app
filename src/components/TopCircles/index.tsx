@@ -1,6 +1,6 @@
 import React from 'react';
 import {Animated, View} from 'react-native';
-import {white} from '../../../assets/colors';
+import {white} from '../../assets/colors';
 
 interface Props {
   opacity?: Animated.AnimatedInterpolation;
