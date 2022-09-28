@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet} from 'react-native';
-import {violet, white} from '../../../../assets/colors';
+import {violet, white} from '../../../assets/colors';
 import {isAndroid} from '../../../utils';
 
 export default StyleSheet.create({
@@ -21,7 +21,7 @@ export default StyleSheet.create({
   text: {
     textAlign: 'center',
     color: white,
-    fontWeight: '900',
+    fontWeight: '700',
   },
   info: {
     marginTop: 15,
@@ -59,11 +59,11 @@ export default StyleSheet.create({
     marginVertical: 3,
   },
   name: {
+    paddingTop: 10,
     textAlign: 'center',
     marginTop: 60,
-    fontWeight: '800',
+    fontWeight: '600',
     fontSize: 22,
-    letterSpacing: 1.5,
   },
   item: {
     justifyContent: 'center',

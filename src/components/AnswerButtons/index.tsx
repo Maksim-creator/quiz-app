@@ -1,25 +1,20 @@
 import React, {useCallback, useMemo, useRef, useState, useEffect} from 'react';
-import {
-  FlatList,
-  ListRenderItem,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, ListRenderItem, TouchableOpacity, View} from 'react-native';
 import {compact} from 'lodash';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {sleep} from '../../utils';
 import {Question} from '../../entities';
-import styles from './styles';
-import {white} from '../../../assets/colors';
+import {white} from '../../assets/colors';
 import Lottie from 'lottie-react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Timer from '../../views/components/Timer';
 import FailModal from '../../views/components/FailModal';
 import {screenNames} from '../../navigation/screenNames';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {NavigationStack} from '../../navigation/entities';
 import {animations} from '../../constants';
+import Text from '../Text';
+import styles from './styles';
 
 interface Props {
   questions: Question[];

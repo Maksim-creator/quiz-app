@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {pink, white} from '../../../assets/colors';
+import {pink, white} from '../../assets/colors';
 import {isAndroid} from '../../utils';
 
 export default StyleSheet.create<any>({
@@ -47,6 +47,7 @@ export default StyleSheet.create<any>({
   },
   questionText: {
     fontWeight: '800',
+    lineHeight: 25,
     fontSize: 20,
     paddingVertical: 10,
   },

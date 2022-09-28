@@ -1,10 +1,11 @@
 import React, {useEffect, useRef} from 'react';
 import Modal from 'react-native-modal';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Lottie from 'lottie-react-native';
 import Button from '../../../components/Button';
 import {quotes} from '../../../constants';
+import Text from '../../../components/Text';
 import styles from './styles';
 
 interface Props {
@@ -43,7 +44,7 @@ const FailModal: React.FC<Props> = ({isVisible, onClose}) => {
           <Text style={styles.description}>But you still have a chance</Text>
           <Lottie
             style={styles.clock}
-            source={require('../../../../assets/times_up.json')}
+            source={require('../../../assets/times_up.json')}
             ref={ref}
           />
           <View style={styles.quoteWrapper}>

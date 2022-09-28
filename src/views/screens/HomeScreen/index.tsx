@@ -1,14 +1,15 @@
 import React from 'react';
-import {Image, SafeAreaView, Text, View} from 'react-native';
+import {Image, SafeAreaView, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
-import {white} from '../../../../assets/colors';
+import {white} from '../../../assets/colors';
 import Button from '../../../components/Button';
 import {userInfo} from './constants';
 import {screenNames} from '../../../navigation/screenNames';
 import {NavigationStack} from '../../../navigation/entities';
 import TopCircles from '../../../components/TopCircles';
+import Text from '../../../components/Text';
 import styles from './styles';
 
 const HomeScreen = () => {

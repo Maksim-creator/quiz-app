@@ -1,8 +1,9 @@
 import {StyleSheet} from 'react-native';
-import {violet, white} from '../../../../assets/colors';
+import {violet, white} from '../../../assets/colors';
 
 export default StyleSheet.create<any>({
   container: {
+    width: '100%',
     height: '100%',
     justifyContent: 'flex-end',
     position: 'absolute',
@@ -29,7 +30,7 @@ export default StyleSheet.create<any>({
     paddingHorizontal: 15,
   },
   label: {
-    fontWeight: '700',
+    fontWeight: '600',
     color: 'rgb(168,168,168)',
   },
   title: {
@@ -60,7 +61,7 @@ export default StyleSheet.create<any>({
   },
   itemText: {
     paddingLeft: 5,
-    fontWeight: '700',
+    fontWeight: '500',
   },
   description: {
     paddingVertical: 10,

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {violet, white} from '../../../assets/colors';
+import {violet, white} from '../../assets/colors';
 
 export const styles = StyleSheet.create<any>({
   button: (disabled: boolean) => ({
@@ -12,7 +12,7 @@ export const styles = StyleSheet.create<any>({
   }),
   buttonText: {
     fontWeight: 'bold',
-    fontSize: 17,
+    fontSize: 16,
     color: white,
     textAlign: 'center',
   },

@@ -8,24 +8,12 @@ export const categories = [
     icon: 'autorenew',
   },
   {
-    label: 'Networking',
-    icon: 'vpn',
-  },
-  {
     label: 'Code',
     icon: 'code-json',
   },
   {
-    label: 'Cloud',
-    icon: 'cloud-tags',
-  },
-  {
     label: 'Docker',
     icon: 'docker',
-  },
-  {
-    icon: 'kubernetes',
-    label: 'Kubernetes',
   },
   {
     icon: 'controller-classic',

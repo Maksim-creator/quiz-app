@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {violet, white} from '../../../../assets/colors';
+import {violet, white} from '../../../assets/colors';
 import {isAndroid} from '../../../utils';
 
 export default StyleSheet.create<any>({
@@ -14,6 +14,7 @@ export default StyleSheet.create<any>({
     fontWeight: '800',
     textAlign: 'center',
     letterSpacing: 1.1,
+    paddingTop: 10,
   },
   backIcon: {
     position: 'absolute',
@@ -50,6 +51,7 @@ export default StyleSheet.create<any>({
     textAlign: 'center',
     fontWeight: '700',
     fontSize: 18,
+    paddingTop: 5,
   },
   titleContainer: {
     position: 'relative',

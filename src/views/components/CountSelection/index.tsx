@@ -4,14 +4,14 @@ import {
   Dimensions,
   Easing,
   Image,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {violet, white} from '../../../../assets/colors';
+import {violet, white} from '../../../assets/colors';
 import Button from '../../../components/Button';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Text from '../../../components/Text';
 import TopCircles from '../../../components/TopCircles';
 
 interface Props {
