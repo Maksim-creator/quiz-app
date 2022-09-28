@@ -5,7 +5,7 @@ export type NavigationStack = {
   [screenNames.INITIAL_SCREEN]: undefined;
   [screenNames.HOME_SCREEN]: undefined;
   [screenNames.QUIZ_SELECTION]: undefined;
-  [screenNames.QUIZ_SCREEN]: {categoryName: string; imageUrl: string};
+  [screenNames.QUIZ_SCREEN]: {categoryName: string};
   [screenNames.RESULT]: {
     score: number;
     questions: Question[];

@@ -1,68 +1,75 @@
 import {Dimensions, StyleSheet} from 'react-native';
-import {lightBlack} from '../../../../assets/colors';
+import {violet, white} from '../../../../assets/colors';
+import {isAndroid} from '../../../utils';
 
 export default StyleSheet.create({
   container: {
+    backgroundColor: violet,
     height: Dimensions.get('window').height,
-    justifyContent: 'space-between',
-  },
-  header: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    paddingHorizontal: 10,
+    justifyContent: 'flex-end',
+    position: 'relative',
   },
   avatar: {
-    zIndex: 20,
-    bottom: -50,
+    top: -65,
+    position: 'absolute',
     alignSelf: 'center',
     width: 100,
     height: 100,
     borderRadius: 100,
-    borderWidth: 1,
-    borderColor: lightBlack,
-    backgroundColor: 'white',
+    backgroundColor: white,
   },
-  content: {
-    backgroundColor: 'white',
-    borderRadius: 18,
-    zIndex: 10,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    shadowColor: 'black',
-    elevation: 5,
-  },
-  text: {textAlign: 'center'},
-  infoContainer: {
-    paddingTop: 60,
-    paddingBottom: 15,
-    alignSelf: 'center',
-    width: '100%',
+  text: {
+    textAlign: 'center',
+    color: white,
+    fontWeight: '900',
   },
   info: {
-    paddingTop: 10,
+    marginTop: 15,
+    alignSelf: 'center',
+    width: '80%',
+    paddingVertical: 20,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingRight: 15,
-  },
-  user: {
-    alignSelf: 'center',
-    width: '85%',
+    paddingHorizontal: 10,
+    backgroundColor: violet,
+    borderRadius: 15,
   },
   buttons: {
     alignSelf: 'center',
     flexDirection: 'row',
-    marginBottom: 40,
+    marginBottom: 20,
     width: '85%',
     justifyContent: 'space-between',
   },
-  boldText: {
+  wrapper: {
+    backgroundColor: white,
+    height: '75%',
+    marginHorizontal: 10,
+    borderRadius: 25,
+    position: 'relative',
+    justifyContent: 'space-between',
+    marginBottom: isAndroid() ? 35 : 0,
+  },
+  label: {
     textAlign: 'center',
     fontWeight: '700',
-    fontSize: 16,
+    fontSize: 13,
+    color: white,
+    opacity: 0.5,
+    marginVertical: 3,
   },
-  wrapper: {paddingHorizontal: 10},
+  name: {
+    textAlign: 'center',
+    marginTop: 60,
+    fontWeight: '800',
+    fontSize: 22,
+    letterSpacing: 1.5,
+  },
+  item: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    width: '49%',
+  },
 });
