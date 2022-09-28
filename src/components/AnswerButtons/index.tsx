@@ -41,7 +41,7 @@ const AnswerButtons: React.FC<Props> = ({
   const [lives, setLives] = useState(3);
   const [score, setScore] = useState(0);
   const animationRef = useRef<Lottie>(null);
-  const timer = useRef<any>();
+  const timer = useRef<NodeJS.Timer>();
 
   const {question, answers, correctAnswers, extraAnswer} = useMemo(
     () => ({
@@ -67,6 +67,7 @@ const AnswerButtons: React.FC<Props> = ({
       return split![0].concat(letter);
     }
   }, [correctAnswers]);
+
   const resetAnswers = () => {
     setRightAnswer(null);
     setSelectedAnswer(null);

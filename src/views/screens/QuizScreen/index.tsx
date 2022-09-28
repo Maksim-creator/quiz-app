@@ -25,7 +25,7 @@ const QuizScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationStack>>();
   const {params} = useRoute<RouteProp<ParamList, 'QuizScreen'>>();
-  const timer = useRef<any>();
+  const timer = useRef<NodeJS.Timer>();
   const [currentStep, setCurrentStep] = useState('count');
   const [timerNumber, setTimerNumber] = useState(3);
   const [questionIndex, setQuestionIndex] = useState<number>(0);
