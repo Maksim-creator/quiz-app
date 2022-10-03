@@ -1,41 +1,53 @@
-import {Animated, Dimensions, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {violet, white} from '../../../assets/colors';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    position: 'relative',
+    backgroundColor: violet,
+    height: '100%',
+    justifyContent: 'flex-end',
+  },
+  mainBlock: {
+    backgroundColor: white,
+    height: '40%',
+    marginHorizontal: 15,
+    borderRadius: 20,
+  },
+  label: {
+    textAlign: 'center',
+    paddingTop: 30,
+    paddingBottom: 19,
+    fontWeight: '700',
+    fontSize: 24,
+  },
+  description: {
+    paddingHorizontal: 30,
+    fontSize: 15,
+    textAlign: 'center',
+    lineHeight: 24,
+    color: '#7a7a7a',
+  },
+  buttons: {
+    marginVertical: 20,
     justifyContent: 'space-around',
-    alignItems: 'center',
+    height: '40%',
   },
-  text: {
-    letterSpacing: 2,
-    fontWeight: 'bold',
-    fontSize: 25,
-    fontFamily: 'Roboto',
+  button: {
+    width: '90%',
+    alignSelf: 'center',
+    borderRadius: 20,
   },
-  textContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+  createAccountButton: {
+    backgroundColor: '#e6e6e6',
+    width: '90%',
+    alignSelf: 'center',
+    borderRadius: 20,
   },
-  image: {
-    height: Dimensions.get('screen').height,
-    width: Dimensions.get('screen').width,
-    flex: 1,
+  buttonText: {
+    color: violet,
+  },
+  lottieAnimation: {
+    marginBottom: 30,
   },
 });
-
-const animatedStyles = StyleSheet.create<any>({
-  text: (animatedValues: Animated.Value[], index: number) => ({
-    opacity: animatedValues[index],
-    transform: [
-      {
-        translateY: Animated.multiply(
-          animatedValues[index],
-          new Animated.Value(-2),
-        ),
-      },
-    ],
-  }),
-});
-
-export const animatedText = (animatedValues: Animated.Value[], index: number) =>
-  StyleSheet.compose(styles.text, animatedStyles.text(animatedValues, index));

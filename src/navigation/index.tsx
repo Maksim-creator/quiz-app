@@ -7,12 +7,15 @@ import {screenNames} from './screenNames';
 import QuizSelection from '../views/screens/QuizSelection';
 import QuizScreen from '../views/screens/QuizScreen';
 import Result from '../views/screens/Result';
+import SignUp from '../views/screens/SignUp';
+import SignIn from '../views/screens/SignIn';
+import {navigationRef} from './navigationService';
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator initialRouteName={screenNames.INITIAL_SCREEN}>
         <Stack.Screen
           name={screenNames.INITIAL_SCREEN}
@@ -38,6 +41,16 @@ const Navigation = () => {
           name={screenNames.RESULT}
           options={{headerShown: false, gestureEnabled: false}}
           component={Result}
+        />
+        <Stack.Screen
+          name={screenNames.SIGN_UP}
+          options={{headerShown: false, gestureEnabled: false}}
+          component={SignUp}
+        />
+        <Stack.Screen
+          name={screenNames.SIGN_IN}
+          options={{headerShown: false, gestureEnabled: false}}
+          component={SignIn}
         />
       </Stack.Navigator>
     </NavigationContainer>

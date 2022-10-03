@@ -33,3 +33,27 @@ export const animations = [
     styles: {width: 70, height: 70, top: isAndroid() ? -29 : -19, left: 10},
   },
 ];
+
+export const registrationFields = [
+  {name: 'name', placeholder: 'Your name', label: 'Name', iconName: 'account'},
+  {
+    name: 'email',
+    placeholder: 'Your email address',
+    label: 'Email',
+    iconName: 'email-outline',
+  },
+  {
+    name: 'password',
+    placeholder: 'Your password',
+    label: 'Password',
+    iconName: 'lock-outline',
+    isPassword: true,
+  },
+  {
+    name: 'confirmPassword',
+    placeholder: 'Confirm your password',
+    label: 'Confirm Password',
+    iconName: 'lock-outline',
+    isPassword: true,
+  },
+];
