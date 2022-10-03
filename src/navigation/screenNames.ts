@@ -4,4 +4,6 @@ export enum screenNames {
   QUIZ_SELECTION = 'quizSelection',
   QUIZ_SCREEN = 'quizScreen',
   RESULT = 'result',
+  SIGN_UP = 'signUp',
+  SIGN_IN = 'signIn',
 }

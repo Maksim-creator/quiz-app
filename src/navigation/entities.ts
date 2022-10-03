@@ -10,4 +10,6 @@ export type NavigationStack = {
     score: number;
     questions: Question[];
   };
+  [screenNames.SIGN_UP]: undefined;
+  [screenNames.SIGN_IN]: undefined;
 };

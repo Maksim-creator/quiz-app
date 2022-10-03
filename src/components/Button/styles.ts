@@ -9,6 +9,7 @@ export const styles = StyleSheet.create<any>({
     backgroundColor: disabled ? 'rgba(105,90,223,0.52)' : violet,
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
   }),
   buttonText: {
     fontWeight: 'bold',

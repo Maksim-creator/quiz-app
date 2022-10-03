@@ -1,7 +1,33 @@
 import {Platform} from 'react-native';
+import * as Yup from 'yup';
 
 export const sleep = (ms: number) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
 export const isAndroid = () => Platform.OS === 'android';
+
+export const signupSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, 'Too Short!')
+    .max(10, 'Too Long!')
+    .required('Field is required'),
+  email: Yup.string().email('Invalid email').required('Field is required'),
+  password: Yup.string()
+    .min(8, 'Too Short!')
+    .max(15, 'Too Long!')
+    .required('Field is required'),
+  confirmPassword: Yup.string()
+    .min(8, 'Too Short!')
+    .max(15, 'Too Long!')
+    .oneOf([Yup.ref('password'), null], "Passwords don't match!")
+    .required('Field is required'),
+});
+
+export const signInSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Field is required'),
+  password: Yup.string()
+    .min(8, 'Too Short!')
+    .max(15, 'Too Long!')
+    .required('Field is required'),
+});

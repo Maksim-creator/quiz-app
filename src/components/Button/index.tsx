@@ -9,6 +9,7 @@ interface Props {
   styles?: ViewStyle;
   textStyles?: TextStyle;
   disabled?: boolean;
+  leftIcon?: () => JSX.Element;
 }
 
 const Button: React.FC<Props> = ({
@@ -17,12 +18,14 @@ const Button: React.FC<Props> = ({
   styles,
   textStyles,
   disabled,
+  leftIcon,
 }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
       style={[buttonStyles.button(disabled), styles]}
       disabled={disabled}>
+      {leftIcon ? leftIcon() : null}
       <Text style={[buttonStyles.buttonText, textStyles]}>{text}</Text>
     </TouchableOpacity>
   );
