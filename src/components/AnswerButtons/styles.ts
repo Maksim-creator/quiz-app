@@ -107,5 +107,9 @@ export default StyleSheet.create<any>({
     width: 60,
     borderWidth: 5,
   },
-  timerText: {color: pink, fontSize: 18},
+  timerText: {
+    color: pink,
+    fontSize: 18,
+    paddingTop: 4,
+  },
 });

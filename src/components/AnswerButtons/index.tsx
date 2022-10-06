@@ -19,7 +19,7 @@ import styles from './styles';
 interface Props {
   questions: Question[];
   questionIndex: number;
-  showNextQuestion: (score: number) => void;
+  showNextQuestion: (score: number, extraPoints?: number) => void;
 }
 
 const AnswerButtons: React.FC<Props> = ({
@@ -34,9 +34,9 @@ const AnswerButtons: React.FC<Props> = ({
   const [timerNumber, setTimerNumber] = useState(15);
   const [isVisible, setIsVisible] = useState(false);
   const [lives, setLives] = useState(3);
-  const [score, setScore] = useState(0);
   const animationRef = useRef<Lottie>(null);
   const timer = useRef<NodeJS.Timer>();
+  const score = useRef(0);
 
   const {question, answers, correctAnswers, extraAnswer} = useMemo(
     () => ({
@@ -47,7 +47,6 @@ const AnswerButtons: React.FC<Props> = ({
     }),
     [questionIndex, questions],
   );
-
   const correctAnswer = useMemo(() => {
     const correctValue = Object.keys(correctAnswers).find(
       key => correctAnswers[key as keyof typeof correctAnswers] === 'true',
@@ -79,12 +78,12 @@ const AnswerButtons: React.FC<Props> = ({
   const handleAnswerSelect =
     (answer: {key: string; value: string}) => async () => {
       if (answer.key === correctAnswer) {
-        setScore((prevState: number) => prevState + 1);
+        score.current++;
       }
       setSelectedAnswer(answer.key);
       setRightAnswer(answer.key === correctAnswer);
       await sleep(1000);
-      showNextQuestion(score);
+      showNextQuestion(score.current);
       resetAnswers();
       setTimerNumber(15);
     };
@@ -149,11 +148,14 @@ const AnswerButtons: React.FC<Props> = ({
   const handleClose = () => {
     if (lives === 1) {
       setIsVisible(false);
-      navigation.navigate(screenNames.RESULT, {questions, score});
+      navigation.navigate(screenNames.RESULT, {
+        questions,
+        score: score.current,
+      });
     } else {
       setLives(prevState => prevState - 1);
       setTimerNumber(15);
-      showNextQuestion(score);
+      showNextQuestion(score.current);
       setIsVisible(false);
     }
   };
@@ -171,7 +173,7 @@ const AnswerButtons: React.FC<Props> = ({
         </View>
         <View style={styles.iconContainer}>
           <Icon name={'puzzle-outline'} size={20} color={white} />
-          <Text style={styles.iconText}>{score * 5}</Text>
+          <Text style={styles.iconText}>{score.current * 5}</Text>
         </View>
       </View>
       <View style={styles.mainBlock}>

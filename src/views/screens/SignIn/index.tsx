@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {SafeAreaView, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Text from '../../../components/Text';
@@ -16,6 +16,8 @@ import {AppDispatch, RootState} from '../../../redux/store';
 import {AuthState} from '../../../redux/auth/entities';
 import Overlay from '../../../components/Overlay';
 import {signInSchema} from '../../../utils';
+import {navigate} from '../../../navigation/navigationService';
+import {screenNames} from '../../../navigation/screenNames';
 
 const SignIn = () => {
   const navigation =
@@ -25,9 +27,15 @@ const SignIn = () => {
 
   const goBack = () => navigation.goBack();
 
-  const handleLogin = (values: {email: string; password: string}) => {
-    dispatch(signInThunk(values));
-  };
+  const handleLogin = useCallback(
+    (values: {email: string; password: string}) => {
+      dispatch(signInThunk(values));
+      if (!loading) {
+        navigate(screenNames.HOME_SCREEN);
+      }
+    },
+    [loading],
+  );
 
   return (
     <SafeAreaView style={styles.container}>
