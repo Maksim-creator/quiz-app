@@ -57,3 +57,48 @@ export const registrationFields = [
     isPassword: true,
   },
 ];
+
+export const results = [
+  {
+    message: 'Can be better!',
+    min: 0,
+    max: 15,
+    colors: {
+      main: '#CD7F32',
+      shadow: '#a86421',
+    },
+  },
+  {
+    message: 'Never give up!',
+    min: 16,
+    max: 30,
+    colors: {
+      main: '#CD7F32',
+      shadow: '#a86421',
+    },
+  },
+  {
+    message: 'Well!',
+    min: 31,
+    max: 50,
+    colors: {main: '#C0C0C0', shadow: '#ababab'},
+  },
+  {
+    message: 'Super!',
+    min: 51,
+    max: 75,
+    colors: {main: '#C0C0C0', shadow: '#ababab'},
+  },
+  {
+    message: 'Perfect!',
+    min: 76,
+    max: 95,
+    colors: {main: '#FFD700', shadow: '#bba00e'},
+  },
+  {
+    message: 'Excellent!',
+    min: 96,
+    max: 100,
+    colors: {main: '#FFD700', shadow: '#bba00e'},
+  },
+];

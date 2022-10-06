@@ -5,18 +5,22 @@ import {
   SafeAreaView,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import Button from '../../../components/Button';
-import {screenNames} from '../../../navigation/screenNames';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useDispatch} from 'react-redux';
 import {NavigationStack} from '../../../navigation/entities';
-import {StyleSheet} from 'react-native';
 import {useCounter} from '../../../hooks/useCounter';
 import Trophy from '../../../assets/svg/Trophy';
 import CorrectAnswersModal from '../../components/CorrectAnswersModal';
 import Text from '../../../components/Text';
 import {Question} from '../../../entities';
+import {updateUserExperience} from '../../../redux/auth/thunk';
+import {AppDispatch} from '../../../redux/store';
+import Button from '../../../components/Button';
+import {screenNames} from '../../../navigation/screenNames';
+import {results} from '../../../constants';
 
 export type ParamList = {
   Result: {
@@ -25,57 +29,14 @@ export type ParamList = {
   };
 };
 
-const results = [
-  {
-    message: 'Can be better!',
-    min: 0,
-    max: 15,
-    colors: {
-      main: '#CD7F32',
-      shadow: '#a86421',
-    },
-  },
-  {
-    message: 'Never give up!',
-    min: 16,
-    max: 30,
-    colors: {
-      main: '#CD7F32',
-      shadow: '#a86421',
-    },
-  },
-  {
-    message: 'Well!',
-    min: 31,
-    max: 50,
-    colors: {main: '#C0C0C0', shadow: '#ababab'},
-  },
-  {
-    message: 'Super!',
-    min: 51,
-    max: 75,
-    colors: {main: '#C0C0C0', shadow: '#ababab'},
-  },
-  {
-    message: 'Perfect!',
-    min: 76,
-    max: 95,
-    colors: {main: '#FFD700', shadow: '#bba00e'},
-  },
-  {
-    message: 'Excellent!',
-    min: 96,
-    max: 100,
-    colors: {main: '#FFD700', shadow: '#bba00e'},
-  },
-];
-
 const Result = () => {
   const {
     params: {score, questions},
   } = useRoute<RouteProp<ParamList, 'Result'>>();
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationStack>>();
+  const dispatch = useDispatch<AppDispatch>();
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const donePercentage = useMemo(
@@ -108,6 +69,11 @@ const Result = () => {
 
   const handleClose = () => setIsModalVisible(false);
   const handleOpen = () => setIsModalVisible(true);
+
+  const handleFinish = async () => {
+    dispatch(updateUserExperience({points: score * 5}));
+    navigation.navigate(screenNames.HOME_SCREEN);
+  };
 
   return (
     <SafeAreaView>
@@ -151,7 +117,7 @@ const Result = () => {
         <Button
           styles={styles.finishButton}
           text={'Finish'}
-          onPress={() => navigation.navigate(screenNames.HOME_SCREEN)}
+          onPress={handleFinish}
         />
       </View>
       <CorrectAnswersModal

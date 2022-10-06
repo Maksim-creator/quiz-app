@@ -1,12 +1,13 @@
 import {client} from '../api.config';
+import {baseLocalUrl} from '../constants';
 
 export default {
   signUp: (payload: {email: string; password: string; name: string}) =>
     client.post('auth/registration', payload, {
-      baseURL: 'http://localhost:7001/',
+      baseURL: baseLocalUrl,
     }),
   signIn: (payload: {email: string; password: string}) =>
     client.post('auth/login', payload, {
-      baseURL: 'http://localhost:7001/',
+      baseURL: baseLocalUrl,
     }),
 };
