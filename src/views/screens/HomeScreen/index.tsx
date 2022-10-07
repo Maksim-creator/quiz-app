@@ -10,21 +10,27 @@ import {NavigationStack} from '../../../navigation/entities';
 import TopCircles from '../../../components/TopCircles';
 import Text from '../../../components/Text';
 import styles from './styles';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../../redux/store';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../../../redux/store';
 import {AuthState} from '../../../redux/auth/entities';
 import Overlay from '../../../components/Overlay';
 import Level from '../../components/Level';
+import {signOutThunk} from '../../../redux/auth/thunk';
 
 const HomeScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationStack>>();
+  const dispatch = useDispatch<AppDispatch>();
   const {data, name, loading} = useSelector<RootState, AuthState>(
     state => state.auth,
   );
 
   const redirectTo = () => {
     navigation.navigate(screenNames.QUIZ_SELECTION);
+  };
+
+  const handleLogout = () => {
+    dispatch(signOutThunk());
   };
 
   return (
@@ -34,7 +40,16 @@ const HomeScreen = () => {
       ) : (
         <>
           <TopCircles />
-          <Level exp={data.totalExperience} />
+          <View style={styles.header}>
+            <Level exp={data.totalExperience} />
+            <Icon
+              name={'logout-variant'}
+              color={white}
+              size={30}
+              style={styles.signOutIcon}
+              onPress={handleLogout}
+            />
+          </View>
           <View style={styles.wrapper}>
             <View>
               <Image

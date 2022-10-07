@@ -72,4 +72,14 @@ export default StyleSheet.create({
   button: {
     width: '49%',
   },
+  signOutIcon: {
+    right: 20,
+    position: 'absolute',
+    top: isAndroid() ? 8 : 56,
+  },
+  header: {
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+  },
 });
