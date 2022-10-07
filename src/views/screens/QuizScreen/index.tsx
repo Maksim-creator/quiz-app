@@ -1,17 +1,19 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Animated, Easing, SafeAreaView} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {client} from '../../../api/api.config';
-import AnswerButtons from '../../../components/AnswerButtons';
+import AnswerButtons from '../../components/AnswerButtons';
 import {screenNames} from '../../../navigation/screenNames';
-import {Question} from '../../../entities';
-import {xApiKey} from '../../../constants';
 import CountSelection from '../../components/CountSelection';
 import Timer from '../../components/Timer';
 import {NavigationStack} from '../../../navigation/entities';
 import styles from './styles';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../../../redux/store';
+import {getQuestionsThunk} from '../../../redux/questions/thunk';
+import {QuestionsState} from '../../../redux/questions/entities';
+import Overlay from '../../../components/Overlay';
 
 export type ParamList = {
   QuizScreen: {
@@ -24,32 +26,28 @@ export type ParamList = {
 const QuizScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationStack>>();
+  const dispatch = useDispatch<AppDispatch>();
+  const {questions, questionsLoading} = useSelector<RootState, QuestionsState>(
+    state => state.questions,
+  );
   const {params} = useRoute<RouteProp<ParamList, 'QuizScreen'>>();
   const timer = useRef<NodeJS.Timer>();
   const [currentStep, setCurrentStep] = useState('count');
   const [timerNumber, setTimerNumber] = useState(3);
   const [questionIndex, setQuestionIndex] = useState<number>(0);
-  const [questions, setQuestions] = useState<Question[]>([]);
 
   const scaleAnimation = new Animated.Value(1.2);
   const opacityAnimation = new Animated.Value(1);
 
-  const handleStart = async (count: number) => {
-    const res = await client.get(
-      `/questions?category=${params.categoryName}&limit=${count}`,
-      {
-        headers: {
-          'X-Api-Key': xApiKey,
-        },
-      },
-    );
-    setQuestions(
-      res.data.filter(
-        (item: Question) => item.multipleCorrectAnswers === 'false',
-      ),
-    );
-    setCurrentStep('timer');
-  };
+  const handleStart = useCallback(
+    async (count: number) => {
+      dispatch(getQuestionsThunk({category: params.categoryName, count}));
+      if (!questionsLoading) {
+        setCurrentStep('timer');
+      }
+    },
+    [questionsLoading],
+  );
 
   const handleShowNextQuestion = (score: number) => {
     if (questionIndex === questions.length - 1) {
@@ -94,6 +92,7 @@ const QuizScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {questionsLoading && <Overlay />}
       {currentStep !== 'started' && currentStep !== 'timer' && (
         <Icon
           onPress={() => {
@@ -111,7 +110,7 @@ const QuizScreen = () => {
           category={params.categoryName}
         />
       )}
-      {currentStep === 'timer' && (
+      {currentStep === 'timer' && !questionsLoading && (
         <Timer
           scaleAnimation={scaleAnimation}
           opacityAnimation={opacityAnimation}

@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {SafeAreaView, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Text from '../../../components/Text';
@@ -16,8 +16,6 @@ import {AppDispatch, RootState} from '../../../redux/store';
 import {AuthState} from '../../../redux/auth/entities';
 import Overlay from '../../../components/Overlay';
 import {signInSchema} from '../../../utils';
-import {navigate} from '../../../navigation/navigationService';
-import {screenNames} from '../../../navigation/screenNames';
 
 const SignIn = () => {
   const navigation =
@@ -27,15 +25,9 @@ const SignIn = () => {
 
   const goBack = () => navigation.goBack();
 
-  const handleLogin = useCallback(
-    (values: {email: string; password: string}) => {
-      dispatch(signInThunk(values));
-      if (!loading) {
-        navigate(screenNames.HOME_SCREEN);
-      }
-    },
-    [loading],
-  );
+  const handleLogin = (values: {email: string; password: string}) => {
+    dispatch(signInThunk(values));
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -71,7 +63,14 @@ const SignIn = () => {
         }}
         validationSchema={signInSchema}
         onSubmit={values => handleLogin(values)}>
-        {({handleChange, handleBlur, values, handleSubmit, errors}) => {
+        {({
+          handleChange,
+          handleBlur,
+          values,
+          handleSubmit,
+          errors,
+          touched,
+        }) => {
           const hasErrors = Object.keys(errors).length !== 0;
           return (
             <View>
@@ -84,6 +83,7 @@ const SignIn = () => {
                 label={'Email'}
                 iconName={'email-outline'}
                 error={errors.email}
+                touched={touched.email}
               />
               <Input
                 value={values.password}
@@ -94,10 +94,13 @@ const SignIn = () => {
                 label={'Password'}
                 iconName={'lock-outline'}
                 error={errors.password}
+                touched={touched.password}
                 isPassword
               />
               <Button
-                disabled={hasErrors}
+                disabled={
+                  hasErrors || !values.email.length || !values.password.length
+                }
                 text={'Login'}
                 onPress={handleSubmit}
                 styles={styles.confirmButton}

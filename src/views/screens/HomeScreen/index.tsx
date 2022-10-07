@@ -48,7 +48,7 @@ const HomeScreen = () => {
               {data && (
                 <View style={styles.info}>
                   <View style={styles.item}>
-                    <Icon name={'cash'} size={25} color={white} />
+                    <Icon name={'puzzle-outline'} size={25} color={white} />
                     <Text style={styles.label}>BALANCE</Text>
                     <Text style={styles.text}>{data.balance}</Text>
                   </View>

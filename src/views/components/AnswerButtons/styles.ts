@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {pink, white} from '../../assets/colors';
-import {isAndroid} from '../../utils';
+import {pink, white} from '../../../assets/colors';
+import {isAndroid} from '../../../utils';
 
 export default StyleSheet.create<any>({
   container: {

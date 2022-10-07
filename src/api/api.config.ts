@@ -7,6 +7,7 @@ import {baseQuizUrl} from './constants';
 const transformResponse = (data: any) => {
   try {
     if (data) {
+      console.log(data);
       const json = JSON.parse(data);
 
       if (json === Object(json)) {

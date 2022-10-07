@@ -7,10 +7,11 @@ export interface AuthState {
 }
 
 export interface SerializedError {
-  name?: string;
-  message?: string;
-  code?: string;
-  stack?: string;
+  response: {
+    data: {
+      message: string;
+    };
+  };
 }
 
 export interface SignUpPayload {
