@@ -4,16 +4,16 @@ import {compact} from 'lodash';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {sleep} from '../../utils';
-import {Question} from '../../entities';
-import {white} from '../../assets/colors';
+import {sleep} from '../../../utils';
+import {Question} from '../../../entities';
+import {white} from '../../../assets/colors';
 import Lottie from 'lottie-react-native';
-import Timer from '../../views/components/Timer';
-import FailModal from '../../views/components/FailModal';
-import {screenNames} from '../../navigation/screenNames';
-import {NavigationStack} from '../../navigation/entities';
-import {animations} from '../../constants';
-import Text from '../Text';
+import Timer from '../Timer';
+import FailModal from '../FailModal';
+import {screenNames} from '../../../navigation/screenNames';
+import {NavigationStack} from '../../../navigation/entities';
+import {animations} from '../../../constants';
+import Text from '../../../components/Text';
 import styles from './styles';
 
 interface Props {

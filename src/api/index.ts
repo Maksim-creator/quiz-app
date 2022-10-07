@@ -1,7 +1,9 @@
-import auth from './auth/index';
-import user from './user/index';
+import auth from './auth';
+import user from './user';
+import questions from './questions';
 
 export default {
   auth,
   user,
+  questions,
 };

@@ -11,6 +11,8 @@ import {
   SignUpResponse,
   UserData,
 } from './entities';
+import {showToast} from '../../utils';
+import {AxiosError} from 'axios';
 
 export const signUpThunk = createAsyncThunk<
   SignUpResponse,
@@ -23,7 +25,10 @@ export const signUpThunk = createAsyncThunk<
     await AsyncStorage.setItem('token', data.token);
     return data;
   } catch (e) {
-    return rejectWithValue(e as SerializedError);
+    if (e instanceof AxiosError) {
+      showToast(e.response?.data.message);
+      return rejectWithValue(e as SerializedError);
+    }
   }
 });
 
@@ -34,16 +39,21 @@ export const signInThunk = createAsyncThunk<
 >('auth/signIn', async ({email, password}, {rejectWithValue}) => {
   try {
     const {data} = await api.auth.signIn({email, password});
-    await AsyncStorage.setItem('token', data.token);
-
+    if (data) {
+      await AsyncStorage.setItem('token', data.token);
+      navigate(screenNames.HOME_SCREEN);
+    }
     return data;
   } catch (e) {
-    return rejectWithValue(e as SerializedError);
+    if (e instanceof AxiosError) {
+      showToast(e.response?.data.message);
+      return rejectWithValue(e as SerializedError);
+    }
   }
 });
 
 export const updateUserExperience = createAsyncThunk<
-  UserData,
+  {data: UserData},
   {points: number},
   {rejectValue: SerializedError}
 >('auth/userExperience', async ({points}, {rejectWithValue}) => {

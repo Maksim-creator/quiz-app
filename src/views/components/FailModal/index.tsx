@@ -15,7 +15,7 @@ interface Props {
 
 const FailModal: React.FC<Props> = ({isVisible, onClose}) => {
   const ref = useRef<Lottie>(null);
-  const numbmerOfQuote = Math.floor(Math.random() * 3);
+  const numberOfQuote = Math.floor(Math.random() * 3);
 
   useEffect(() => {
     ref.current?.play();
@@ -49,8 +49,8 @@ const FailModal: React.FC<Props> = ({isVisible, onClose}) => {
           />
           <View style={styles.quoteWrapper}>
             <Text style={styles.quote}>
-              {quotes[numbmerOfQuote].quote}
-              <Text style={styles.author}>{quotes[numbmerOfQuote].author}</Text>
+              {quotes[numberOfQuote].quote}
+              <Text style={styles.author}>{quotes[numberOfQuote].author}</Text>
             </Text>
           </View>
         </View>

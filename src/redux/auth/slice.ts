@@ -21,10 +21,11 @@ const authSlice = createSlice({
       state.email = payload.email;
       state.name = payload.name;
       state.data = payload.data;
+      state.error = '';
     });
-    builder.addCase(signUpThunk.rejected, (state, action) => {
+    builder.addCase(signUpThunk.rejected, (state, {payload}) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = payload?.response.data.message;
     });
     builder.addCase(signInThunk.pending, state => {
       state.loading = true;
@@ -34,10 +35,11 @@ const authSlice = createSlice({
       state.email = payload.email;
       state.name = payload.name;
       state.data = payload.data;
+      state.error = '';
     });
-    builder.addCase(signInThunk.rejected, (state, action) => {
+    builder.addCase(signInThunk.rejected, (state, {payload}) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = payload?.response.data.message;
     });
     builder.addCase(updateUserExperience.pending, state => {
       state.loading = true;

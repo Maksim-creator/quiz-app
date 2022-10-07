@@ -1,4 +1,5 @@
 import {Platform} from 'react-native';
+import Toast from 'react-native-toast-message';
 import * as Yup from 'yup';
 
 export const sleep = (ms: number) => {
@@ -31,3 +32,17 @@ export const signInSchema = Yup.object().shape({
     .max(15, 'Too Long!')
     .required('Field is required'),
 });
+
+export const showToast = (
+  text: string,
+  type: 'error' | 'success' | 'info' = 'error',
+  duration: number = 3000,
+  buttonText: string = 'OK',
+) =>
+  Toast.show({
+    type,
+    text1: text,
+    position: 'bottom',
+    visibilityTime: duration,
+    props: {buttonText},
+  });
