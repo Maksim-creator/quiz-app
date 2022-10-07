@@ -64,3 +64,16 @@ export const updateUserExperience = createAsyncThunk<
     return rejectWithValue(e as SerializedError);
   }
 });
+
+export const signOutThunk = createAsyncThunk<
+  void,
+  void,
+  {rejectValue: SerializedError}
+>('auth/signOut', async (_, {rejectWithValue}) => {
+  try {
+    await AsyncStorage.clear();
+    navigate(screenNames.INITIAL_SCREEN);
+  } catch (e) {
+    return rejectWithValue(e as SerializedError);
+  }
+});

@@ -1,5 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {signInThunk, signUpThunk, updateUserExperience} from './thunk';
+import {
+  signInThunk,
+  signOutThunk,
+  signUpThunk,
+  updateUserExperience,
+} from './thunk';
 import {AuthState} from './entities';
 
 const initialState: AuthState = {
@@ -51,6 +56,15 @@ const authSlice = createSlice({
     builder.addCase(updateUserExperience.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
+    });
+    builder.addCase(signOutThunk.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(signOutThunk.fulfilled, () => ({
+      ...initialState,
+    }));
+    builder.addCase(signOutThunk.rejected, state => {
+      state.loading = false;
     });
   },
 });

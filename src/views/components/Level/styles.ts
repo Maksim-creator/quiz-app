@@ -1,10 +1,11 @@
 import {StyleSheet} from 'react-native';
 import {white} from '../../../assets/colors';
+import {isAndroid} from '../../../utils';
 
 export default StyleSheet.create<any>({
   container: {
     position: 'absolute',
-    top: 50,
+    top: isAndroid() ? 0 : 50,
     left: 20,
     flexDirection: 'row',
     alignItems: 'center',
