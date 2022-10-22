@@ -10,7 +10,7 @@ const Overlay = () => {
     </View>
   );
 };
-console.log('dasdas')
+console.log('dguanhkusdas')
 export default Overlay;
 
 const styles = StyleSheet.create({
