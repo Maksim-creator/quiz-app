@@ -1,5 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {signInThunk, signUpThunk, updateUserExperience} from './thunk';
+import {
+  getUserBadgesThunk,
+  signInThunk,
+  signUpThunk,
+  updateUserExperience,
+} from './thunk';
 import {AuthState} from './entities';
 
 const initialState: AuthState = {
@@ -51,6 +56,13 @@ const authSlice = createSlice({
     builder.addCase(updateUserExperience.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
+    });
+    builder.addCase(getUserBadgesThunk.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(getUserBadgesThunk.fulfilled, (state, {payload}) => {
+      state.badges = payload;
+      state.loading = false;
     });
   },
 });

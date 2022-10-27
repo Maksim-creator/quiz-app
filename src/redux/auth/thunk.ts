@@ -10,6 +10,7 @@ import {
   SignInResponse,
   SignUpResponse,
   UserData,
+  Badge,
 } from './entities';
 import {showToast} from '../../utils';
 import {AxiosError} from 'axios';
@@ -59,6 +60,20 @@ export const updateUserExperience = createAsyncThunk<
 >('auth/userExperience', async ({points}, {rejectWithValue}) => {
   try {
     const {data} = await api.user.updateExperience({points});
+    return data;
+  } catch (e) {
+    return rejectWithValue(e as SerializedError);
+  }
+});
+
+export const getUserBadgesThunk = createAsyncThunk<
+  Badge[],
+  void,
+  {rejectValue: SerializedError}
+>('user/getBadges', async (_, {rejectWithValue}) => {
+  try {
+    const {data} = await api.user.getBadges();
+
     return data;
   } catch (e) {
     return rejectWithValue(e as SerializedError);

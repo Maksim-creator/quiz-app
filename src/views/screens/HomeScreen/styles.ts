@@ -1,8 +1,8 @@
 import {Dimensions, StyleSheet} from 'react-native';
 import {violet, white} from '../../../assets/colors';
-import {isAndroid} from '../../../utils';
+import {isAndroid, isTablet} from '../../../utils';
 
-export default StyleSheet.create({
+export default StyleSheet.create<any>({
   container: {
     backgroundColor: violet,
     height: Dimensions.get('window').height,
@@ -26,7 +26,7 @@ export default StyleSheet.create({
   info: {
     marginTop: 15,
     alignSelf: 'center',
-    width: '80%',
+    width: isTablet() ? '50%' : '80%',
     paddingVertical: 20,
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -72,4 +72,26 @@ export default StyleSheet.create({
   button: {
     width: '49%',
   },
+  tabIndicator: {
+    backgroundColor: violet,
+    width: 7,
+    height: 7,
+    borderRadius: 100,
+    left: (Dimensions.get('screen').width - 20 - 7) / 6, // total width - marginHorizontal - indicatorWidth / totalTabs * 2
+  },
+  tabBar: {
+    backgroundColor: white,
+    marginTop: 15,
+    shadowOffset: {height: 0, width: 0},
+    shadowColor: 'transparent',
+    shadowOpacity: 0,
+    elevation: 0,
+  },
+  tabText: (focused: boolean) => ({
+    color: focused ? violet : '#adaaaa',
+    fontWeight: '700',
+    fontSize: 14,
+  }),
+  sceneContainer: {borderBottomWidth: 0},
+  initialLayout: {width: Dimensions.get('screen').width},
 });
