@@ -1,12 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, SafeAreaView, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useNavigation} from '@react-navigation/native';
 import {white} from '../../../assets/colors';
-import Button from '../../../components/Button';
-import {screenNames} from '../../../navigation/screenNames';
-import {NavigationStack} from '../../../navigation/entities';
 import TopCircles from '../../../components/TopCircles';
 import Text from '../../../components/Text';
 import styles from './styles';
@@ -15,18 +10,49 @@ import {AppDispatch, RootState} from '../../../redux/store';
 import {AuthState} from '../../../redux/auth/entities';
 import Overlay from '../../../components/Overlay';
 import Level from '../../components/Level';
-import {signOutThunk} from '../../../redux/auth/thunk';
+import {Route, SceneMap, TabBar, TabView} from 'react-native-tab-view';
+import Badges from '../../components/Badges';
+import Rating from '../../components/Rating';
+import UserDetails from '../../components/UserDetails';
+import {
+  NavigationState,
+  SceneRendererProps,
+} from 'react-native-tab-view/lib/typescript/types';
+import {getUserBadgesThunk, signOutThunk} from '../../../redux/auth/thunk';
+import {tabRoutes as routes} from './constants';
+
+const renderScene = SceneMap({
+  badge: Badges,
+  stats: Rating,
+  details: UserDetails,
+});
 
 const HomeScreen = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<NavigationStack>>();
   const dispatch = useDispatch<AppDispatch>();
   const {data, name, loading} = useSelector<RootState, AuthState>(
     state => state.auth,
   );
+  useEffect(() => {
+    dispatch(getUserBadgesThunk());
+  }, [dispatch]);
 
-  const redirectTo = () => {
-    navigation.navigate(screenNames.QUIZ_SELECTION);
+  const [tabIndex, setTabIndex] = useState(0);
+
+  const renderTabBar = (
+    props: SceneRendererProps & {
+      navigationState: NavigationState<Route>;
+    },
+  ) => {
+    return (
+      <TabBar
+        {...props}
+        renderLabel={({focused, route}) => {
+          return <Text style={styles.tabText(focused)}>{route.title}</Text>;
+        }}
+        indicatorStyle={styles.tabIndicator}
+        style={styles.tabBar}
+      />
+    );
   };
 
   const handleLogout = () => {
@@ -80,18 +106,17 @@ const HomeScreen = () => {
                 </View>
               )}
             </View>
-            <View style={styles.buttons}>
-              <Button
-                styles={styles.button}
-                text={'Random quiz'}
-                onPress={() => {}}
-              />
-              <Button
-                styles={styles.button}
-                text={'Select quiz'}
-                onPress={redirectTo}
-              />
-            </View>
+            <TabView
+              onIndexChange={setTabIndex}
+              navigationState={{
+                index: tabIndex,
+                routes,
+              }}
+              renderScene={renderScene}
+              initialLayout={styles.initialLayout}
+              sceneContainerStyle={styles.sceneContainer}
+              renderTabBar={renderTabBar}
+            />
           </View>
         </>
       )}

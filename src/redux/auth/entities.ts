@@ -4,6 +4,7 @@ export interface AuthState {
   name?: string;
   error?: string;
   data?: UserData;
+  badges?: Badge[];
 }
 
 export interface SerializedError {
@@ -43,4 +44,17 @@ export interface UserData {
   totalExperience: number;
   rank: number;
   balance: number;
+}
+
+export interface Badge {
+  badgeColor: string;
+  borderColor: string;
+  iconBackground: string;
+  description: string;
+  title: string;
+  name: string;
+  bronze: string;
+  silver: string;
+  gold: string;
+  icon: string;
 }

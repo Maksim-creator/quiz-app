@@ -1,6 +1,7 @@
 import {Platform} from 'react-native';
 import Toast from 'react-native-toast-message';
 import * as Yup from 'yup';
+import DeviceInfo from 'react-native-device-info';
 
 export const sleep = (ms: number) => {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -46,3 +47,8 @@ export const showToast = (
     visibilityTime: duration,
     props: {buttonText},
   });
+
+export const isInRange = (val: number, min: number, max: number) =>
+  val >= min && val <= max;
+
+export const isTablet = () => DeviceInfo.isTablet();
