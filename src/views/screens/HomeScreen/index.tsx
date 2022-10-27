@@ -18,7 +18,7 @@ import {
   NavigationState,
   SceneRendererProps,
 } from 'react-native-tab-view/lib/typescript/types';
-import {getUserBadgesThunk} from '../../../redux/auth/thunk';
+import {getUserBadgesThunk, signOutThunk} from '../../../redux/auth/thunk';
 import {tabRoutes as routes} from './constants';
 
 const renderScene = SceneMap({
@@ -28,6 +28,8 @@ const renderScene = SceneMap({
 });
 
 const HomeScreen = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<NavigationStack>>();
   const dispatch = useDispatch<AppDispatch>();
   const {data, name, loading} = useSelector<RootState, AuthState>(
     state => state.auth,
@@ -55,6 +57,10 @@ const HomeScreen = () => {
     );
   };
 
+  const handleLogout = () => {
+    dispatch(signOutThunk());
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       {loading || !data ? (
@@ -62,7 +68,16 @@ const HomeScreen = () => {
       ) : (
         <>
           <TopCircles />
-          <Level exp={data.totalExperience} />
+          <View style={styles.header}>
+            <Level exp={data.totalExperience} />
+            <Icon
+              name={'logout-variant'}
+              color={white}
+              size={30}
+              style={styles.signOutIcon}
+              onPress={handleLogout}
+            />
+          </View>
           <View style={styles.wrapper}>
             <View>
               <Image

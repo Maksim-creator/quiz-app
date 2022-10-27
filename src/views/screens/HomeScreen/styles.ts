@@ -94,4 +94,14 @@ export default StyleSheet.create<any>({
   }),
   sceneContainer: {borderBottomWidth: 0},
   initialLayout: {width: Dimensions.get('screen').width},
+  signOutIcon: {
+    right: 20,
+    position: 'absolute',
+    top: isAndroid() ? 8 : 56,
+  },
+  header: {
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+  },
 });
