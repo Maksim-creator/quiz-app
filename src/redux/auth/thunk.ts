@@ -66,7 +66,6 @@ export const updateUserExperience = createAsyncThunk<
   }
 });
 
-
 export const getUserBadgesThunk = createAsyncThunk<
   Badge[],
   void,
@@ -75,7 +74,7 @@ export const getUserBadgesThunk = createAsyncThunk<
   try {
     const {data} = await api.user.getBadges();
     return data;
-   } catch (e) {
+  } catch (e) {
     return rejectWithValue(e as SerializedError);
   }
 });

@@ -28,8 +28,6 @@ const renderScene = SceneMap({
 });
 
 const HomeScreen = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<NavigationStack>>();
   const dispatch = useDispatch<AppDispatch>();
   const {data, name, loading} = useSelector<RootState, AuthState>(
     state => state.auth,
