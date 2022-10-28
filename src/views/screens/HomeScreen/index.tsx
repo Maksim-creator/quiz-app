@@ -8,7 +8,6 @@ import styles from './styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../../redux/store';
 import {AuthState} from '../../../redux/auth/entities';
-import Overlay from '../../../components/Overlay';
 import Level from '../../components/Level';
 import {Route, SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import Badges from '../../components/Badges';
@@ -29,9 +28,7 @@ const renderScene = SceneMap({
 
 const HomeScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const {data, name, loading} = useSelector<RootState, AuthState>(
-    state => state.auth,
-  );
+  const {data, name} = useSelector<RootState, AuthState>(state => state.auth);
   useEffect(() => {
     dispatch(getUserBadgesThunk());
   }, [dispatch]);
@@ -61,65 +58,61 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {loading || !data ? (
-        <Overlay />
-      ) : (
-        <>
-          <TopCircles />
-          <View style={styles.header}>
-            <Level exp={data.totalExperience} />
-            <Icon
-              name={'logout-variant'}
-              color={white}
-              size={30}
-              style={styles.signOutIcon}
-              onPress={handleLogout}
-            />
-          </View>
-          <View style={styles.wrapper}>
-            <View>
-              <Image
-                source={{
-                  uri: 'https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-male-3-1024.png',
-                }}
-                resizeMode={'cover'}
-                style={styles.avatar}
-              />
-              <Text style={styles.name}>{name}</Text>
-              {data && (
-                <View style={styles.info}>
-                  <View style={styles.item}>
-                    <Icon name={'puzzle-outline'} size={25} color={white} />
-                    <Text style={styles.label}>BALANCE</Text>
-                    <Text style={styles.text}>{data.balance}</Text>
-                  </View>
-                  <View style={styles.item}>
-                    <Icon name={'star-outline'} size={25} color={white} />
-                    <Text style={styles.label}>EXP</Text>
-                    <Text style={styles.text}>{data.totalExperience}</Text>
-                  </View>
-                  <View style={styles.item}>
-                    <Icon name={'earth'} size={25} color={white} />
-                    <Text style={styles.label}>RANK</Text>
-                    <Text style={styles.text}>#{data.rank}</Text>
-                  </View>
-                </View>
-              )}
-            </View>
-            <TabView
-              onIndexChange={setTabIndex}
-              navigationState={{
-                index: tabIndex,
-                routes,
-              }}
-              renderScene={renderScene}
-              initialLayout={styles.initialLayout}
-              sceneContainerStyle={styles.sceneContainer}
-              renderTabBar={renderTabBar}
-            />
-          </View>
-        </>
+      <TopCircles />
+      {data && (
+        <View style={styles.header}>
+          <Level exp={data.totalExperience} />
+          <Icon
+            name={'logout-variant'}
+            color={white}
+            size={30}
+            style={styles.signOutIcon}
+            onPress={handleLogout}
+          />
+        </View>
       )}
+      <View style={styles.wrapper}>
+        <View>
+          <Image
+            source={{
+              uri: 'https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-male-3-1024.png',
+            }}
+            resizeMode={'cover'}
+            style={styles.avatar}
+          />
+          <Text style={styles.name}>{name}</Text>
+          {data && (
+            <View style={styles.info}>
+              <View style={styles.item}>
+                <Icon name={'puzzle-outline'} size={25} color={white} />
+                <Text style={styles.label}>BALANCE</Text>
+                <Text style={styles.text}>{data.balance}</Text>
+              </View>
+              <View style={styles.item}>
+                <Icon name={'star-outline'} size={25} color={white} />
+                <Text style={styles.label}>EXP</Text>
+                <Text style={styles.text}>{data.totalExperience}</Text>
+              </View>
+              <View style={styles.item}>
+                <Icon name={'earth'} size={25} color={white} />
+                <Text style={styles.label}>RANK</Text>
+                <Text style={styles.text}>#{data.rank}</Text>
+              </View>
+            </View>
+          )}
+        </View>
+        <TabView
+          onIndexChange={setTabIndex}
+          navigationState={{
+            index: tabIndex,
+            routes,
+          }}
+          renderScene={renderScene}
+          initialLayout={styles.initialLayout}
+          sceneContainerStyle={styles.sceneContainer}
+          renderTabBar={renderTabBar}
+        />
+      </View>
     </SafeAreaView>
   );
 };
