@@ -42,7 +42,7 @@ export const signInThunk = createAsyncThunk<
     const {data} = await api.auth.signIn({email, password});
     if (data) {
       await AsyncStorage.setItem('token', data.token);
-      navigate(screenNames.HOME_SCREEN);
+      navigate(screenNames.HOME);
     }
     return data;
   } catch (e) {
