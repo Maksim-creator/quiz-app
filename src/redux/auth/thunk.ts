@@ -9,6 +9,7 @@ import {
   SerializedError,
   SignInResponse,
   SignUpResponse,
+  ResetPayload,
   UserData,
 } from './entities';
 import {showToast} from '../../utils';
@@ -62,6 +63,25 @@ export const updateUserExperience = createAsyncThunk<
     return data;
   } catch (e) {
     return rejectWithValue(e as SerializedError);
+  }
+});
+
+export const resetThunk = createAsyncThunk<
+  void,
+  ResetPayload,
+  {rejectValue: SerializedError}
+>('auth/reset', async ({email}, {rejectWithValue}) => {
+  try {
+    const {data} = await api.auth.resetPassword({email});
+    if (data) {
+      navigate(screenNames.SIGN_IN);
+    }
+    return data;
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      showToast(e.response?.data.message);
+      return rejectWithValue(e as SerializedError);
+    }
   }
 });
 
