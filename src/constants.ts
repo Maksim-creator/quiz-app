@@ -1,6 +1,5 @@
 import {isAndroid} from './utils';
 
-export const welcomeMessage = 'Welcome to Quizlet!';
 export const xApiKey = 'bkbUKh3iV0hLIuCsht7H9uKt1HU2nIwCOSqzGgh1';
 
 export const quotes = [
@@ -102,3 +101,33 @@ export const results = [
     colors: {main: '#FFD700', shadow: '#bba00e'},
   },
 ];
+
+export const badgeColors = {
+  bronze: {
+    palette: {
+      outer: '#CF751C',
+      moon: 'rgba(234,200,128,0.53)',
+      inner: '#C98A26',
+      starOuter: '#CC8F47',
+      starInner: 'rgba(255,168,0,0.23)',
+    },
+  },
+  silver: {
+    palette: {
+      outer: '#C0C0C0',
+      moon: '#C0C0C0',
+      inner: '#DCDCDC',
+      starOuter: '#EDEDED',
+      starInner: '#FFFFFF',
+    },
+  },
+  gold: {
+    palette: {
+      outer: '#FFC850',
+      moon: '#FFC850',
+      inner: '#E1A546',
+      starOuter: '#FFFFFF',
+      starInner: '#FFFAB4',
+    },
+  },
+};

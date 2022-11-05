@@ -8,4 +8,5 @@ export default {
     client.put('users/updatePoints', payload, {
       baseURL: baseLocalUrl,
     }),
+  getBadges: () => client.get('/badges', {baseURL: baseLocalUrl}),
 };

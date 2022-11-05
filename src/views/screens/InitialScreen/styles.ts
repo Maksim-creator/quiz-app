@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {violet, white} from '../../../assets/colors';
+import {isTablet} from '../../../utils';
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,7 +11,7 @@ export const styles = StyleSheet.create({
   },
   mainBlock: {
     backgroundColor: white,
-    height: '40%',
+    height: isTablet() ? '25%' : '40%',
     marginHorizontal: 15,
     borderRadius: 20,
   },

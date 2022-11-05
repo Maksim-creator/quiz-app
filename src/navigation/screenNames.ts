@@ -7,4 +7,7 @@ export enum screenNames {
   RESULT = 'result',
   SIGN_UP = 'signUp',
   SIGN_IN = 'signIn',
+  DISCOVER = 'discover',
+  HOME = 'home',
+  STATISTICS = 'statistics',
 }

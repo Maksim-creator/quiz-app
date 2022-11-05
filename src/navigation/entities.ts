@@ -12,5 +12,4 @@ export type NavigationStack = {
   };
   [screenNames.SIGN_UP]: undefined;
   [screenNames.SIGN_IN]: undefined;
-  [screenNames.RECOVERY_SCREEN]: undefined;
 };

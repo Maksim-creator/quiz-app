@@ -35,13 +35,13 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {loading ? (
+      {loading || !data ? (
         <Overlay />
       ) : (
         <>
           <TopCircles />
           <View style={styles.header}>
-            <Level exp={1} />
+            <Level exp={data.totalExperience} />
             <Icon
               name={'logout-variant'}
               color={white}
@@ -59,7 +59,7 @@ const HomeScreen = () => {
                 resizeMode={'cover'}
                 style={styles.avatar}
               />
-              <Text style={styles.name}>{'name'}</Text>
+              <Text style={styles.name}>{name}</Text>
               {data && (
                 <View style={styles.info}>
                   <View style={styles.item}>
