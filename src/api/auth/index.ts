@@ -10,4 +10,8 @@ export default {
     client.post('auth/login', payload, {
       baseURL: baseLocalUrl,
     }),
+  resetPassword: (payload: {email: string}) =>
+    client.post('/resetPassword', payload, {
+      baseURL: baseLocalUrl,
+    }),
 };
