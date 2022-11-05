@@ -37,7 +37,9 @@ export interface SignInPayload {
   email: string;
   password: string;
 }
-
+export interface ResetPayload {
+  email: string;
+}
 export interface UserData {
   level: number;
   totalExperience: number;

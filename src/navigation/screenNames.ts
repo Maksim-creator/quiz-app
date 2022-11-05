@@ -1,6 +1,7 @@
 export enum screenNames {
   INITIAL_SCREEN = 'initialScreen',
   HOME_SCREEN = 'homeScreen',
+  RECOVERY_SCREEN = 'recoveryScreen',
   QUIZ_SELECTION = 'quizSelection',
   QUIZ_SCREEN = 'quizScreen',
   RESULT = 'result',

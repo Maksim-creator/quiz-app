@@ -7,6 +7,7 @@ import {screenNames} from './screenNames';
 import QuizSelection from '../views/screens/QuizSelection';
 import QuizScreen from '../views/screens/QuizScreen';
 import Result from '../views/screens/Result';
+import RecoveryScreen from "../views/screens/RecoveryScreen";
 import SignUp from '../views/screens/SignUp';
 import SignIn from '../views/screens/SignIn';
 import {navigationRef} from './navigationService';
@@ -51,6 +52,11 @@ const Navigation = () => {
           name={screenNames.SIGN_IN}
           options={{headerShown: false, gestureEnabled: false}}
           component={SignIn}
+        />
+        <Stack.Screen
+          name={screenNames.RECOVERY_SCREEN}
+          options={{headerShown: false}}
+          component={RecoveryScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
