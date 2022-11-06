@@ -86,11 +86,8 @@ export const resetThunk = createAsyncThunk<
   {rejectValue: SerializedError}
 >('auth/reset', async ({email}, {rejectWithValue}) => {
   try {
-    const {data} = await api.auth.resetPassword({email});
-    if (data) {
-      navigate(screenNames.SIGN_IN);
-    }
-    return data;
+    await api.auth.resetPassword({email});
+    navigate(screenNames.SIGN_IN);
   } catch (e) {
     if (e instanceof AxiosError) {
       showToast(e.response?.data.message);
