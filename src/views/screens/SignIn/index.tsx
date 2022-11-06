@@ -112,8 +112,8 @@ const SignIn = () => {
           );
         }}
       </Formik>
-      <TouchableOpacity style={styles.resetPassword}>
-        <Text onPress={handleReset} style={styles.resetPasswordText}>
+      <TouchableOpacity onPress={handleReset} style={styles.resetPassword}>
+        <Text  style={styles.resetPasswordText}>
           Forgot password?
         </Text>
       </TouchableOpacity>

@@ -71,9 +71,7 @@ const RecoveryScreen = () => {
                 touched={touched.email}
               />
               <Button
-                disabled={
-                  hasErrors || !values.email.length || !values.password.length
-                }
+                disabled={hasErrors || !values.email.length}
                 text={'Reset Password'}
                 onPress={handleSubmit}
                 styles={styles.confirmButton}
