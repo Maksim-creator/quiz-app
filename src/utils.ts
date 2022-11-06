@@ -34,7 +34,7 @@ export const signInSchema = Yup.object().shape({
     .required('Field is required'),
 });
 export const resetSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Field is required'),
+  email: Yup.string().email('Invalid email').required('Field is required'),
 });
 export const showToast = (
   text: string,

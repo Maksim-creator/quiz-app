@@ -30,7 +30,7 @@ const RecoveryScreen = () => {
       {loading && <Overlay />}
       <View style={styles.header}>
         <Icon
-          name={'arrow-left-thin'}
+          name={'chevron-left'}
           size={35}
           color={'black'}
           style={styles.icon}
@@ -41,7 +41,6 @@ const RecoveryScreen = () => {
       <Formik
         initialValues={{
           email: '',
-          password: '',
         }}
         validationSchema={resetSchema}
         onSubmit={values => handleReset(values)}>

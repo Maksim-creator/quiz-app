@@ -11,7 +11,7 @@ export default {
       baseURL: baseLocalUrl,
     }),
   resetPassword: (payload: {email: string}) =>
-    client.post('/resetPassword', payload, {
+    client.post('auth/resetPassword', payload, {
       baseURL: baseLocalUrl,
     }),
 };
