@@ -84,7 +84,7 @@ export const resetThunk = createAsyncThunk<
   void,
   ResetPayload,
   {rejectValue: SerializedError}
->('auth/reset', async ({email}, {rejectWithValue}) => {
+>('auth/resetPassword', async ({email}, {rejectWithValue}) => {
   try {
     await api.auth.resetPassword({email});
     navigate(screenNames.SIGN_IN);
