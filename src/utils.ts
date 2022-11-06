@@ -33,7 +33,9 @@ export const signInSchema = Yup.object().shape({
     .max(15, 'Too Long!')
     .required('Field is required'),
 });
-
+export const resetSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Field is required'),
+});
 export const showToast = (
   text: string,
   type: 'error' | 'success' | 'info' = 'error',
