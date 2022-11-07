@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {lightViolet, violet, white} from '../../../assets/colors';
+import {lightViolet} from '../../../assets/colors';
 
 export default StyleSheet.create({
   container: {
@@ -32,6 +32,9 @@ export default StyleSheet.create({
     marginTop: 15,
   },
   text: {
-    marginLeft: '20px',
+    marginVertical: 20,
+    lineHeight: 21,
+    color: '#737373',
+    paddingHorizontal: 40,
   },
 });

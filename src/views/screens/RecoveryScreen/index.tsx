@@ -14,7 +14,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../../redux/store';
 import {AuthState} from '../../../redux/auth/entities';
 import Overlay from '../../../components/Overlay';
-import {resetThunk} from '../../../redux/auth/thunk';
+import {resetPasswordThunk} from '../../../redux/auth/thunk';
 
 const RecoveryScreen = () => {
   const navigation =
@@ -22,7 +22,7 @@ const RecoveryScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
   const {loading} = useSelector<RootState, AuthState>(state => state.auth);
   const handleReset = (values: {email: string}) => {
-    dispatch(resetThunk(values));
+    dispatch(resetPasswordThunk(values));
   };
   const goBack = () => navigation.goBack();
   return (
@@ -65,7 +65,7 @@ const RecoveryScreen = () => {
                 handleBlur={handleBlur('email')}
                 placeholder={'Your email address'}
                 styles={styles.input}
-                label={'Email'}
+                label={'Email Address'}
                 iconName={'email-outline'}
                 error={errors.email}
                 touched={touched.email}

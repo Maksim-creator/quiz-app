@@ -80,7 +80,7 @@ export const getUserBadgesThunk = createAsyncThunk<
   }
 });
 
-export const resetThunk = createAsyncThunk<
+export const resetPasswordThunk = createAsyncThunk<
   void,
   ResetPayload,
   {rejectValue: SerializedError}
