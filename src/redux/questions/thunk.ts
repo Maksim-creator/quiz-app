@@ -15,7 +15,7 @@ export const getQuestionsThunk = createAsyncThunk<
       const payload = {category, topic, limit: count};
 
       const {data} = await api.questions.getQuestions(payload);
-      console.log(data);
+
       return data;
     } catch (e) {
       rejectWithValue(e as SerializedError);
