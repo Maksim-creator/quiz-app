@@ -16,6 +16,7 @@ import {AppDispatch, RootState} from '../../../redux/store';
 import {AuthState} from '../../../redux/auth/entities';
 import Overlay from '../../../components/Overlay';
 import {signInSchema} from '../../../utils';
+import {screenNames} from '../../../navigation/screenNames';
 
 const SignIn = () => {
   const navigation =
@@ -24,7 +25,9 @@ const SignIn = () => {
   const {loading} = useSelector<RootState, AuthState>(state => state.auth);
 
   const goBack = () => navigation.goBack();
-
+  const handleReset = () => {
+    navigation.navigate(screenNames.RECOVERY_SCREEN);
+  };
   const handleLogin = (values: {email: string; password: string}) => {
     dispatch(signInThunk(values));
   };
@@ -109,8 +112,10 @@ const SignIn = () => {
           );
         }}
       </Formik>
-      <TouchableOpacity style={styles.resetPassword}>
-        <Text style={styles.resetPasswordText}>Forgot password?</Text>
+      <TouchableOpacity onPress={handleReset} style={styles.resetPassword}>
+        <Text  style={styles.resetPasswordText}>
+          Forgot password?
+        </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
