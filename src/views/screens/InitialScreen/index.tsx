@@ -11,15 +11,34 @@ import Text from '../../../components/Text';
 import Button from '../../../components/Button';
 import Lottie from 'lottie-react-native';
 import Logo from '../../../assets/svg/Logo';
+import * as Keychain from 'react-native-keychain';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '../../../redux/store';
+import {signInThunk} from '../../../redux/auth/thunk';
 
 const InitialScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationStack>>();
+  const dispatch = useDispatch<AppDispatch>();
   const ref = useRef<Lottie>(null);
 
   useEffect(() => {
-    ref.current?.play();
-  }, []);
+    if (ref.current) {
+      ref.current.play();
+    }
+    const getCredentials = async () => {
+      const credentials = await Keychain.getGenericPassword();
+      if (credentials) {
+        dispatch(
+          signInThunk({
+            email: credentials.username,
+            password: credentials.password,
+          }),
+        );
+      }
+    };
+    getCredentials();
+  }, [ref]);
 
   const handleRegistration = () => {
     navigation.navigate(screenNames.SIGN_UP);
