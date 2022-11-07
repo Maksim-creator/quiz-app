@@ -4,6 +4,7 @@ import InitialScreen from '../views/screens/InitialScreen';
 import SignUp from '../views/screens/SignUp';
 import SignIn from '../views/screens/SignIn';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import RecoveryScreen from '../views/screens/RecoveryScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,11 @@ const AuthStack = () => {
         name={screenNames.SIGN_IN}
         options={{headerShown: false, gestureEnabled: false}}
         component={SignIn}
+      />
+      <Stack.Screen
+        name={screenNames.RECOVERY_SCREEN}
+        options={{headerShown: false}}
+        component={RecoveryScreen}
       />
     </Stack.Navigator>
   );
