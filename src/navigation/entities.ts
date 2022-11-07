@@ -3,9 +3,13 @@ import {Question} from '../entities';
 
 export type NavigationStack = {
   [screenNames.INITIAL_SCREEN]: undefined;
-  [screenNames.HOME_SCREEN]: undefined;
-  [screenNames.QUIZ_SELECTION]: undefined;
-  [screenNames.QUIZ_SCREEN]: {categoryName: string};
+  [screenNames.USER_PROFILE]: undefined;
+  [screenNames.QUIZ_SELECTION]: {categoryName?: string};
+  [screenNames.QUIZ_SCREEN]: {
+    categoryName: string;
+    topicName: string;
+    author: string;
+  };
   [screenNames.RESULT]: {
     score: number;
     questions: Question[];
@@ -15,4 +19,5 @@ export type NavigationStack = {
   [screenNames.DISCOVER]: undefined;
   [screenNames.HOME]: undefined;
   [screenNames.STATISTICS]: undefined;
+  [screenNames.TOPICS]: {category: string};
 };

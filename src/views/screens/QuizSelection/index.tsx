@@ -14,15 +14,22 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {isUndefined} from 'lodash';
 import {NavigationStack} from '../../../navigation/entities';
 import {screenNames} from '../../../navigation/screenNames';
-import {categories} from './constants';
 import {pink, violet, white} from '../../../assets/colors';
 import Button from '../../../components/Button';
 import Text from '../../../components/Text';
 import styles from './styles';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../../redux/store';
+import {QuestionsState} from '../../../redux/questions/entities';
 
 const QuizSelection = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationStack>>();
+
+  const {categories} = useSelector<RootState, QuestionsState>(
+    state => state.questions,
+  );
+
   const [selectedTopic, setSelectedTopic] = useState<string>();
 
   const animatedSections: Animated.Value[] = useMemo(
@@ -84,8 +91,8 @@ const QuizSelection = () => {
 
   const handleContinue = () => {
     if (selectedTopic) {
-      navigation.navigate(screenNames.QUIZ_SCREEN, {
-        categoryName: selectedTopic,
+      navigation.navigate(screenNames.TOPICS, {
+        category: selectedTopic,
       });
     }
   };

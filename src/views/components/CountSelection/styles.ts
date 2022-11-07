@@ -90,4 +90,5 @@ export default StyleSheet.create<any>({
     alignItems: 'center',
   }),
   descriptionContent: {paddingVertical: 15},
+  avatar: {height: 50, width: 50},
 });

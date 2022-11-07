@@ -18,6 +18,8 @@ interface Props {
   error?: string;
   touched?: boolean;
   isPassword?: boolean;
+  iconColor?: string;
+  placeholderTextColor?: string;
 }
 
 const Input: React.FC<Props> = ({
@@ -33,6 +35,8 @@ const Input: React.FC<Props> = ({
   error,
   isPassword,
   touched,
+  iconColor,
+  placeholderTextColor,
 }) => {
   return (
     <View style={[mainInputStyles.container, styles]}>
@@ -42,7 +46,7 @@ const Input: React.FC<Props> = ({
           style={mainInputStyles.icon}
           name={iconName}
           size={25}
-          color={violet}
+          color={iconColor || violet}
         />
         <TextInput
           style={[
@@ -60,7 +64,7 @@ const Input: React.FC<Props> = ({
           value={value}
           onBlur={handleBlur}
           placeholder={placeholder}
-          placeholderTextColor={'grey'}
+          placeholderTextColor={placeholderTextColor || 'grey'}
           autoCapitalize={'none'}
           secureTextEntry={isPassword}
         />

@@ -49,7 +49,7 @@ const CorrectAnswersModal: React.FC<Props> = ({
           {answersArray.map(answer => {
             const isCorrect = answer.key === correctAnswer();
             return (
-              <View style={styles.answer(isCorrect)}>
+              <View style={styles.answer(isCorrect)} key={answer.value}>
                 <Text style={styles.answerText(isCorrect)}>{answer.value}</Text>
               </View>
             );

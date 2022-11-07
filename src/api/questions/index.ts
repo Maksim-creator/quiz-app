@@ -1,11 +1,13 @@
 import {client} from '../api.config';
-import {xApiKey} from '../../constants';
+import {baseLocalUrl} from '../constants';
 
 export default {
-  getQuestions: (category: string, count: number) =>
-    client.get(`/questions?category=${category}&limit=${count}`, {
-      headers: {
-        'X-Api-Key': xApiKey,
-      },
-    }),
+  getQuestions: (payload: {category: string; topic: string; limit: number}) =>
+    client.post('quizzes', payload, {baseURL: baseLocalUrl}),
+  getTopSelected: () =>
+    client.get('quizzes/topSelected', {baseURL: baseLocalUrl}),
+  getCategories: () =>
+    client.get('quizzes/categories', {baseURL: baseLocalUrl}),
+  getTopics: (category: string) =>
+    client.post('quizzes/topics', {category}, {baseURL: baseLocalUrl}),
 };

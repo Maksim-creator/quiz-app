@@ -22,7 +22,7 @@ export const signUpThunk = createAsyncThunk<
 >('auth/signUp', async ({email, password, name}, {rejectWithValue}) => {
   try {
     const {data} = await api.auth.signUp({email, password, name});
-    navigate(screenNames.HOME_SCREEN);
+    navigate(screenNames.HOME);
     await AsyncStorage.setItem('token', data.token);
     return data;
   } catch (e) {

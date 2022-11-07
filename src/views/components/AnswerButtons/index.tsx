@@ -115,7 +115,9 @@ const AnswerButtons: React.FC<Props> = ({
   }, [isRightAnswer, selectedAnswer]);
 
   useEffect(() => {
-    animationRef.current?.play();
+    if (animationRef.current) {
+      animationRef.current.play();
+    }
   }, []);
 
   const animation = useMemo(() => {

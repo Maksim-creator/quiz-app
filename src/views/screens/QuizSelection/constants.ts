@@ -16,10 +16,6 @@ export const categories = [
     icon: 'docker',
   },
   {
-    icon: 'controller-classic',
-    label: 'Brawl Stars',
-  },
-  {
     icon: 'database-search',
     label: 'SQL',
   },

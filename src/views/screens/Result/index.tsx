@@ -72,7 +72,7 @@ const Result = () => {
 
   const handleFinish = async () => {
     dispatch(updateUserExperience({points: score * 5}));
-    navigation.navigate(screenNames.HOME_SCREEN);
+    navigation.navigate(screenNames.HOME);
   };
 
   return (

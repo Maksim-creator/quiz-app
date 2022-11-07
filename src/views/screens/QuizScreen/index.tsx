@@ -17,9 +17,11 @@ import Overlay from '../../../components/Overlay';
 
 export type ParamList = {
   QuizScreen: {
+    topicName: string;
     categoryName: string;
     limit: number;
     imageUrl: string;
+    author: string;
   };
 };
 
@@ -41,7 +43,13 @@ const QuizScreen = () => {
 
   const handleStart = useCallback(
     async (count: number) => {
-      dispatch(getQuestionsThunk({category: params.categoryName, count}));
+      dispatch(
+        getQuestionsThunk({
+          category: params.categoryName,
+          topic: params.topicName,
+          count,
+        }),
+      );
       if (!questionsLoading) {
         setCurrentStep('timer');
       }
@@ -99,7 +107,7 @@ const QuizScreen = () => {
             navigation.goBack();
           }}
           style={styles.backIcon}
-          name={'arrow-left-thin'}
+          name={'chevron-left'}
           size={35}
           color={'white'}
         />
@@ -108,6 +116,8 @@ const QuizScreen = () => {
         <CountSelection
           handleStart={handleStart}
           category={params.categoryName}
+          author={params.author}
+          topic={params.topicName}
         />
       )}
       {currentStep === 'timer' && !questionsLoading && (

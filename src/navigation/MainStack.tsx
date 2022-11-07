@@ -2,11 +2,11 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {screenNames} from './screenNames';
 import ProfileStack from './ProfileStack';
-import Discover from '../views/screens/Discover';
 import Home from '../views/screens/Home';
 import Statistics from '../views/screens/Statistics';
 import {StyleSheet} from 'react-native';
 import {renderTabBarIcon} from './navigationHelpers';
+import DiscoverQuizStack from './DiscoverQuizStack';
 const Tab = createBottomTabNavigator();
 
 const MainStack = () => {
@@ -31,7 +31,7 @@ const MainStack = () => {
           headerShown: false,
           tabBarIcon: renderTabBarIcon('magnify'),
         }}
-        component={Discover}
+        component={DiscoverQuizStack}
       />
       <Tab.Screen
         name={screenNames.STATISTICS}
@@ -42,7 +42,7 @@ const MainStack = () => {
         component={Statistics}
       />
       <Tab.Screen
-        name={screenNames.HOME_SCREEN}
+        name={screenNames.PROFILE}
         options={{
           headerShown: false,
           tabBarIcon: renderTabBarIcon('account'),
@@ -58,8 +58,9 @@ export default MainStack;
 const styles = StyleSheet.create({
   tabBar: {
     position: 'absolute',
-    height: 85,
-    borderRadius: 15,
+    height: 80,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
     shadowOffset: {
       width: 0,
       height: 0,
