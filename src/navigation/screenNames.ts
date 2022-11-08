@@ -1,6 +1,6 @@
 export enum screenNames {
   INITIAL_SCREEN = 'initialScreen',
-  HOME_SCREEN = 'homeScreen',
+  USER_PROFILE = 'userProfile',
   RECOVERY_SCREEN = 'recoveryScreen',
   QUIZ_SELECTION = 'quizSelection',
   QUIZ_SCREEN = 'quizScreen',
@@ -10,4 +10,8 @@ export enum screenNames {
   DISCOVER = 'discover',
   HOME = 'home',
   STATISTICS = 'statistics',
+  TOPICS = 'topics',
+  AUTH_STACK = 'authStack',
+  TABS_STACK = 'tabsStack',
+  PROFILE = 'PROFILE',
 }

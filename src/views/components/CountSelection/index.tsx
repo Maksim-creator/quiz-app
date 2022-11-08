@@ -17,9 +17,16 @@ import TopCircles from '../../../components/TopCircles';
 interface Props {
   handleStart: (count: number) => void;
   category: string;
+  author: string;
+  topic: string;
 }
 
-const CountSelection: React.FC<Props> = ({handleStart, category}) => {
+const CountSelection: React.FC<Props> = ({
+  handleStart,
+  category,
+  author,
+  topic,
+}) => {
   const [count, setCount] = useState(5);
   const animatedBlock = useRef(new Animated.Value(0)).current;
   const animatedOpacity = useRef(new Animated.Value(0)).current;
@@ -72,7 +79,7 @@ const CountSelection: React.FC<Props> = ({handleStart, category}) => {
           {transform: [{translateY: blockInterpolation}]},
         ]}>
         <Text style={styles.label}>{category.toUpperCase()}</Text>
-        <Text style={styles.title}>Basic {category} Quiz</Text>
+        <Text style={styles.title}>{topic} Quiz</Text>
         <View style={styles.configBlock}>
           <View style={styles.configItem}>
             <View style={styles.circleIcon(violet)}>
@@ -115,11 +122,11 @@ const CountSelection: React.FC<Props> = ({handleStart, category}) => {
             source={{
               uri: 'https://cdn-icons-png.flaticon.com/512/147/147142.png',
             }}
-            style={{height: 50, width: 50}}
+            style={styles.avatar}
             resizeMode={'cover'}
           />
           <View style={styles.nameContainer}>
-            <Text style={styles.name}>Bernard Grey</Text>
+            <Text style={styles.name}>{author}</Text>
             <Text style={styles.role}>Creator</Text>
           </View>
         </View>

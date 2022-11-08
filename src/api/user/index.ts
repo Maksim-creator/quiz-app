@@ -9,4 +9,6 @@ export default {
       baseURL: baseLocalUrl,
     }),
   getBadges: () => client.get('/badges', {baseURL: baseLocalUrl}),
+  getLeaderboard: () =>
+    client.get('users/leaderboard', {baseURL: baseLocalUrl}),
 };

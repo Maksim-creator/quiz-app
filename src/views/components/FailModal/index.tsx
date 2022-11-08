@@ -18,7 +18,9 @@ const FailModal: React.FC<Props> = ({isVisible, onClose}) => {
   const numberOfQuote = Math.floor(Math.random() * 3);
 
   useEffect(() => {
-    ref.current?.play();
+    if (ref.current) {
+      ref.current.play();
+    }
   }, []);
 
   return (

@@ -30,7 +30,7 @@ export default StyleSheet.create<any>({
   },
   items: {
     backgroundColor: white,
-    height: isAndroid() ? '85%' : '87%',
+    height: isAndroid() ? '85%' : '80%',
     width: '95%',
     marginVertical: 10,
     borderRadius: 25,

@@ -1,20 +1,20 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {screenNames} from './screenNames';
-import HomeScreen from '../views/screens/HomeScreen';
+import Discover from '../views/screens/Discover';
 
 const Stack = createNativeStackNavigator();
 
-const ProfileStack = () => {
+const DiscoverQuizStack = () => {
   return (
-    <Stack.Navigator initialRouteName={screenNames.USER_PROFILE}>
+    <Stack.Navigator initialRouteName={screenNames.DISCOVER}>
       <Stack.Screen
+        name={screenNames.DISCOVER}
         options={{headerShown: false}}
-        name={screenNames.USER_PROFILE}
-        component={HomeScreen}
+        component={Discover}
       />
     </Stack.Navigator>
   );
 };
 
-export default ProfileStack;
+export default DiscoverQuizStack;
