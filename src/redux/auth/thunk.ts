@@ -15,6 +15,7 @@ import {
 } from './entities';
 import {showToast} from '../../utils';
 import {AxiosError} from 'axios';
+import * as Keychain from 'react-native-keychain';
 
 export const signUpThunk = createAsyncThunk<
   SignUpResponse,
@@ -41,6 +42,8 @@ export const signInThunk = createAsyncThunk<
 >('auth/signIn', async ({email, password}, {rejectWithValue}) => {
   try {
     const {data} = await api.auth.signIn({email, password});
+    await Keychain.setGenericPassword(email, password);
+
     if (data) {
       await AsyncStorage.setItem('token', data.token);
       navigate(screenNames.HOME);
