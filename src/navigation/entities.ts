@@ -15,4 +15,5 @@ export type NavigationStack = {
   [screenNames.DISCOVER]: undefined;
   [screenNames.HOME]: undefined;
   [screenNames.STATISTICS]: undefined;
+  [screenNames.RECOVERY_SCREEN]: undefined;
 };
