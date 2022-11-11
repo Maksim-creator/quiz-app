@@ -76,6 +76,27 @@ const Home = () => {
     };
   });
 
+  const navigateToQuiz =
+    (item: {
+      topic: string;
+      selectedTimes: number;
+      quiz: Question[];
+      author: string;
+    }) =>
+    () => {
+      navigation.navigate(screenNames.QUIZ_SCREEN, {
+        author: item.author,
+        topicName: item.topic,
+        categoryName: topic!.category,
+      });
+    };
+
+  const navigateToTopic = () => {
+    navigation.navigate(screenNames.TOPICS, {
+      category: topic!.category,
+    });
+  };
+
   const renderItem: ListRenderItem<{
     topic: string;
     selectedTimes: number;
@@ -83,15 +104,7 @@ const Home = () => {
     author: string;
   }> = ({item}) => {
     return (
-      <TouchableOpacity
-        style={styles.card}
-        onPress={() =>
-          navigation.navigate(screenNames.QUIZ_SCREEN, {
-            author: item.author,
-            topicName: item.topic,
-            categoryName: topic!.category,
-          })
-        }>
+      <TouchableOpacity style={styles.card} onPress={navigateToQuiz(item)}>
         <View style={styles.item}>
           <View style={styles.itemIconWrapper}>
             <Icon
@@ -130,11 +143,7 @@ const Home = () => {
             <Text style={styles.title}>Live Quizzes</Text>
             <TouchableOpacity
               style={styles.showAllButton}
-              onPress={() =>
-                navigation.navigate(screenNames.TOPICS, {
-                  category: topic!.category,
-                })
-              }>
+              onPress={navigateToTopic}>
               <Text style={styles.showAllButtonText}>See all</Text>
             </TouchableOpacity>
           </View>
