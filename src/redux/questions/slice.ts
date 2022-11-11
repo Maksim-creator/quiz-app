@@ -12,12 +12,27 @@ const initialState: QuestionsState = {
   questions: [],
   questionsError: '',
   categories: [],
+  recentQuiz: {
+    topic: '',
+    category: '',
+    donePercentage: 0,
+    author: '',
+  },
 };
 
 const questionsSlice = createSlice({
   name: 'questions',
   initialState,
-  reducers: {},
+  reducers: {
+    setRecentQuiz: (state, action) => {
+      state.recentQuiz = {
+        topic: action.payload.topic,
+        category: action.payload.category,
+        donePercentage: action.payload.donePercentage,
+        author: action.payload.author,
+      };
+    },
+  },
   extraReducers: builder => {
     builder.addCase(getQuestionsThunk.pending, state => {
       state.questionsLoading = true;
@@ -49,7 +64,7 @@ const questionsSlice = createSlice({
       state.categories = payload;
     });
     builder.addCase(getCategoriesThunk.rejected, (state, {payload}) => {
-      state.categoriesLoading = true;
+      state.categoriesLoading = false;
       state.categoriesError = payload?.response.data.message;
     });
     builder.addCase(getTopicsThunk.pending, state => {

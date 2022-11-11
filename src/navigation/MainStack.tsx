@@ -42,7 +42,7 @@ const MainStack = () => {
         component={Statistics}
       />
       <Tab.Screen
-        name={screenNames.PROFILE}
+        name={screenNames.USER_PROFILE}
         options={{
           headerShown: false,
           tabBarIcon: renderTabBarIcon('account'),

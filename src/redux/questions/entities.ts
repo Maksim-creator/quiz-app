@@ -13,6 +13,12 @@ export interface QuestionsState {
   topic?: Quiz;
   topicLoading?: boolean;
   topicError?: string;
+  recentQuiz: {
+    topic: string;
+    category: string;
+    donePercentage: number;
+    author: string;
+  };
 }
 
 export interface Quiz {

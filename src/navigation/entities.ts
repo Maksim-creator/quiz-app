@@ -13,6 +13,8 @@ export type NavigationStack = {
   [screenNames.RESULT]: {
     score: number;
     questions: Question[];
+    category: string;
+    topic: string;
   };
   [screenNames.SIGN_UP]: undefined;
   [screenNames.SIGN_IN]: undefined;
