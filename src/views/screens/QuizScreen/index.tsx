@@ -62,6 +62,8 @@ const QuizScreen = () => {
       navigation.navigate(screenNames.RESULT, {
         score,
         questions,
+        topic: params.topicName,
+        category: params.categoryName,
       });
     } else {
       setQuestionIndex(prevState => prevState + 1);

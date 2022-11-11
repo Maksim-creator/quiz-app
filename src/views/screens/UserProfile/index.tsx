@@ -26,7 +26,7 @@ const renderScene = SceneMap({
   details: UserDetails,
 });
 
-const HomeScreen = () => {
+const UserProfile = () => {
   const dispatch = useDispatch<AppDispatch>();
   const {data, name} = useSelector<RootState, AuthState>(state => state.auth);
   useEffect(() => {
@@ -117,4 +117,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default UserProfile;

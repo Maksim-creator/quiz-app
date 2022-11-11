@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {NavigationStack} from '../../../navigation/entities';
 import {useCounter} from '../../../hooks/useCounter';
 import Trophy from '../../../assets/svg/Trophy';
@@ -17,25 +17,32 @@ import CorrectAnswersModal from '../../components/CorrectAnswersModal';
 import Text from '../../../components/Text';
 import {Question} from '../../../entities';
 import {updateUserExperience} from '../../../redux/auth/thunk';
-import {AppDispatch} from '../../../redux/store';
+import {AppDispatch, RootState} from '../../../redux/store';
 import Button from '../../../components/Button';
 import {screenNames} from '../../../navigation/screenNames';
 import {results} from '../../../constants';
+import {actions} from '../../../redux/questions';
+import {QuestionsState} from '../../../redux/questions/entities';
 
 export type ParamList = {
   Result: {
     score: number;
     questions: Question[];
+    topic: string;
+    category: string;
   };
 };
 
 const Result = () => {
   const {
-    params: {score, questions},
+    params: {score, questions, topic, category},
   } = useRoute<RouteProp<ParamList, 'Result'>>();
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationStack>>();
   const dispatch = useDispatch<AppDispatch>();
+  const {topic: q} = useSelector<RootState, QuestionsState>(
+    state => state.questions,
+  );
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -56,6 +63,17 @@ const Result = () => {
       duration: 2000,
       easing: Easing.linear,
     }).start();
+  }, []);
+
+  useEffect(() => {
+    dispatch(
+      actions.setRecentQuiz({
+        donePercentage,
+        topic,
+        category,
+        author: q?.data.find(item => item.topic === topic)?.author,
+      }),
+    );
   }, []);
 
   const widthInterpolation = animatedWidth.interpolate({
