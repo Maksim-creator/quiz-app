@@ -5,6 +5,7 @@ import {
   signOutThunk,
   signUpThunk,
   updateUserExperience,
+  uploadAvatarThunk,
 } from './thunk';
 import {AuthState} from './entities';
 
@@ -41,6 +42,7 @@ const authSlice = createSlice({
       state.email = payload.email;
       state.name = payload.name;
       state.data = payload.data;
+      state.avatar = payload.avatar;
       state.error = '';
     });
     builder.addCase(signInThunk.rejected, (state, {payload}) => {
@@ -77,6 +79,16 @@ const authSlice = createSlice({
     }));
     builder.addCase(signOutThunk.rejected, state => {
       state.loading = false;
+    });
+    builder.addCase(uploadAvatarThunk.pending, state => {
+      state.avatarLoading = true;
+    });
+    builder.addCase(uploadAvatarThunk.fulfilled, (state, action) => {
+      state.avatarLoading = false;
+      state.avatar = action.payload;
+    });
+    builder.addCase(uploadAvatarThunk.rejected, state => {
+      state.avatarLoading = false;
     });
   },
 });

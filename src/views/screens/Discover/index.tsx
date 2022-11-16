@@ -30,7 +30,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {NavigationStack} from '../../../navigation/entities';
 import Lottie from 'lottie-react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {getLeaderboardThunk} from '../../../redux/leaderboard/thunk';
+import {getUserLeaderThunk} from '../../../redux/leaderboard/thunk';
 import {AppDispatch, RootState} from '../../../redux/store';
 import {InitialState as LeaderboardState} from '../../../redux/leaderboard/entinties';
 import {
@@ -39,6 +39,7 @@ import {
 } from '../../../redux/questions/thunk';
 import {QuestionsState} from '../../../redux/questions/entities';
 import {isTablet} from '../../../utils';
+import {defaultAvatar} from '../../../constants';
 
 const MAX_TRANSLATE_Y = -Dimensions.get('window').height + 180;
 const MIN_TRANSLATE_Y = !isTablet()
@@ -55,7 +56,7 @@ const Discover = () => {
   const translateY = useSharedValue(0);
   const context = useSharedValue({y: 0});
 
-  const {leaderboard, leaderboardLoading, leaderboardError} = useSelector<
+  const {leader, leaderError, leaderLoading} = useSelector<
     RootState,
     LeaderboardState
   >(state => state.leaderboard);
@@ -94,9 +95,9 @@ const Discover = () => {
   });
 
   useEffect(() => {
+    dispatch(getUserLeaderThunk());
     dispatch(getCategoriesThunk());
     dispatch(getTopSelectedThunk());
-    dispatch(getLeaderboardThunk());
     translateY.value = withSpring(MIN_TRANSLATE_Y);
   }, []);
 
@@ -184,41 +185,41 @@ const Discover = () => {
       <GestureDetector gesture={gesture}>
         <Animated.View style={[styles.content, reanimatedSheetStyle]}>
           <Text style={styles.contentTitle}>Top rank of the game</Text>
-          {leaderboardLoading ? (
+          {leaderLoading ? (
             <View style={styles.spinnerContainer}>
               <ActivityIndicator size={'large'} color={violet} />
             </View>
           ) : (
             <View style={styles.topPlayer}>
-              {leaderboardError ? (
-                <Text style={styles.error}>{leaderboardError}</Text>
+              {leaderError ? (
+                <Text style={styles.error}>{leaderError}</Text>
               ) : (
                 <View>
-                  {leaderboard.length ? (
+                  {leader ? (
                     <View style={styles.leaderboard}>
                       <View style={styles.topPosition}>
                         <Text style={styles.firstText}>1</Text>
                       </View>
                       <Image
                         source={{
-                          uri: 'https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-male-3-1024.png',
+                          uri: leader.avatar
+                            ? 'data:image/jpeg;base64,' + leader.avatar
+                            : defaultAvatar,
                         }}
                         resizeMode={'cover'}
                         style={styles.avatar}
                       />
                       <View style={styles.leaderboardContent}>
-                        <Text style={styles.leaderName}>
-                          {leaderboard[0].name}
-                        </Text>
+                        <Text style={styles.leaderName}>{leader.name}</Text>
                         <Text style={styles.totalPoints}>
-                          {leaderboard[0].totalExperience} points
+                          {leader.totalExperience} points
                         </Text>
                       </View>
                     </View>
                   ) : null}
                 </View>
               )}
-              {!leaderboardError && !leaderboardLoading && (
+              {!leaderError && !leaderLoading && (
                 <>
                   <BottomRightLines />
                   <Icon

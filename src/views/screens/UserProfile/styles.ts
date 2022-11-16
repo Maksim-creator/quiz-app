@@ -17,6 +17,10 @@ export default StyleSheet.create<any>({
     height: 100,
     borderRadius: 100,
     backgroundColor: white,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: violet,
   },
   text: {
     textAlign: 'center',
@@ -103,5 +107,10 @@ export default StyleSheet.create<any>({
     position: 'absolute',
     top: 0,
     width: '100%',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 100,
   },
 });
