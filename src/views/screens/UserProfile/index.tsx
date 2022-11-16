@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {Image, SafeAreaView, View} from 'react-native';
+import {ActivityIndicator, Image, SafeAreaView, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {white} from '../../../assets/colors';
+import {violet, white} from '../../../assets/colors';
 import TopCircles from '../../../components/TopCircles';
 import Text from '../../../components/Text';
 import styles from './styles';
@@ -28,7 +28,9 @@ const renderScene = SceneMap({
 
 const UserProfile = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const {data, name} = useSelector<RootState, AuthState>(state => state.auth);
+  const {data, name, avatar, avatarLoading} = useSelector<RootState, AuthState>(
+    state => state.auth,
+  );
   useEffect(() => {
     dispatch(getUserBadgesThunk());
   }, [dispatch]);
@@ -73,13 +75,21 @@ const UserProfile = () => {
       )}
       <View style={styles.wrapper}>
         <View>
-          <Image
-            source={{
-              uri: 'https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-male-3-1024.png',
-            }}
-            resizeMode={'cover'}
-            style={styles.avatar}
-          />
+          <View style={styles.avatar}>
+            {!avatarLoading ? (
+              <Image
+                source={{
+                  uri: avatar
+                    ? 'data:image/jpeg;base64,' + avatar
+                    : 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper.png',
+                }}
+                resizeMode={'cover'}
+                style={styles.image}
+              />
+            ) : (
+              <ActivityIndicator size={'small'} color={violet} />
+            )}
+          </View>
           <Text style={styles.name}>{name}</Text>
           {data && (
             <View style={styles.info}>

@@ -5,6 +5,8 @@ export interface AuthState {
   error?: string;
   data?: UserData;
   badges?: Badge[];
+  avatar?: string;
+  avatarLoading?: boolean;
 }
 
 export interface SerializedError {
@@ -32,6 +34,7 @@ export interface SignInResponse {
   email: string;
   name: string;
   data: UserData;
+  avatar: string;
 }
 
 export interface SignInPayload {
@@ -59,4 +62,8 @@ export interface Badge {
   silver: string;
   gold: string;
   icon: string;
+}
+
+export interface Avatar {
+  _parts: [[string, {name: string; uri: string; type: string}]];
 }

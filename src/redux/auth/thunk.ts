@@ -111,3 +111,16 @@ export const signOutThunk = createAsyncThunk<
     return rejectWithValue(e as SerializedError);
   }
 });
+
+export const uploadAvatarThunk = createAsyncThunk<
+  string,
+  FormData,
+  {rejectValue: SerializedError}
+>('auth/uploadAvatar', async (file, {rejectWithValue}) => {
+  try {
+    const {data} = await api.user.uploadAvatar(file);
+    return data.data;
+  } catch (e) {
+    return rejectWithValue(e as SerializedError);
+  }
+});

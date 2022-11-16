@@ -1,16 +1,29 @@
 import React, {useEffect, useRef} from 'react';
-import {Animated, Image, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Animated,
+  Image,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Text from '../../../components/Text';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../../redux/store';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../../../redux/store';
 import {AuthState} from '../../../redux/auth/entities';
 import {renderGreeting} from './utils';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {uploadAvatarThunk} from '../../../redux/auth/thunk';
+import {white} from '../../../assets/colors';
 
 const HomeHeader = () => {
   const {name} = useSelector<RootState, AuthState>(state => state.auth);
   const animatedOpacity = useRef(new Animated.Value(0)).current;
+  const dispatch = useDispatch<AppDispatch>();
+  const {avatar, avatarLoading} = useSelector<RootState, AuthState>(
+    state => state.auth,
+  );
 
   const greeting = renderGreeting();
 
@@ -22,6 +35,18 @@ const HomeHeader = () => {
     }).start();
   }, []);
 
+  const chooseFile = async () => {
+    const {assets} = await launchImageLibrary({mediaType: 'photo'});
+
+    const formData = new FormData();
+    formData.append('file', {
+      uri: assets![0]!.uri,
+      type: assets![0]!.type!,
+      name: assets![0].fileName,
+    } as any);
+    dispatch(uploadAvatarThunk(formData));
+  };
+
   return (
     <Animated.View style={[styles.container, {opacity: animatedOpacity}]}>
       <View style={styles.header}>
@@ -32,13 +57,21 @@ const HomeHeader = () => {
           </View>
           <Text style={styles.name}>{name}</Text>
         </View>
-        <Image
-          source={{
-            uri: 'https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-male-3-1024.png',
-          }}
-          resizeMode={'cover'}
-          style={styles.avatar}
-        />
+        <TouchableOpacity style={styles.avatarContainer} onPress={chooseFile}>
+          {avatarLoading ? (
+            <ActivityIndicator color={white} size={'small'} />
+          ) : (
+            <Image
+              source={{
+                uri: avatar
+                  ? 'data:image/jpeg;base64,' + avatar
+                  : 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper.png',
+              }}
+              resizeMode={'cover'}
+              style={styles.avatar}
+            />
+          )}
+        </TouchableOpacity>
       </View>
     </Animated.View>
   );
