@@ -16,6 +16,7 @@ import {renderGreeting} from './utils';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {uploadAvatarThunk} from '../../../redux/auth/thunk';
 import {white} from '../../../assets/colors';
+import {defaultAvatar} from '../../../constants';
 
 const HomeHeader = () => {
   const {name} = useSelector<RootState, AuthState>(state => state.auth);
@@ -65,7 +66,7 @@ const HomeHeader = () => {
               source={{
                 uri: avatar
                   ? 'data:image/jpeg;base64,' + avatar
-                  : 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper.png',
+                  : defaultAvatar,
               }}
               resizeMode={'cover'}
               style={styles.avatar}

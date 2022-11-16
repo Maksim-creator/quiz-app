@@ -63,7 +63,3 @@ export interface Badge {
   gold: string;
   icon: string;
 }
-
-export interface Avatar {
-  _parts: [[string, {name: string; uri: string; type: string}]];
-}

@@ -19,6 +19,7 @@ import {
 } from 'react-native-tab-view/lib/typescript/types';
 import {getUserBadgesThunk, signOutThunk} from '../../../redux/auth/thunk';
 import {tabRoutes as routes} from './constants';
+import {defaultAvatar} from '../../../constants';
 
 const renderScene = SceneMap({
   badge: Badges,
@@ -81,7 +82,7 @@ const UserProfile = () => {
                 source={{
                   uri: avatar
                     ? 'data:image/jpeg;base64,' + avatar
-                    : 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper.png',
+                    : defaultAvatar,
                 }}
                 resizeMode={'cover'}
                 style={styles.image}

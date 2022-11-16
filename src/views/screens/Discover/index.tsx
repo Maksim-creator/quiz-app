@@ -39,6 +39,7 @@ import {
 } from '../../../redux/questions/thunk';
 import {QuestionsState} from '../../../redux/questions/entities';
 import {isTablet} from '../../../utils';
+import {defaultAvatar} from '../../../constants';
 
 const MAX_TRANSLATE_Y = -Dimensions.get('window').height + 180;
 const MIN_TRANSLATE_Y = !isTablet()
@@ -203,7 +204,7 @@ const Discover = () => {
                         source={{
                           uri: leader.avatar
                             ? 'data:image/jpeg;base64,' + leader.avatar
-                            : 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper.png',
+                            : defaultAvatar,
                         }}
                         resizeMode={'cover'}
                         style={styles.avatar}
